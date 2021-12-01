@@ -14,4 +14,16 @@ Si no corresponde: Usuario no identificado.
 - hacer un servidor django
 - interfaz en servidor: medidas, imagen camara, usuario
 
-Si no es identificado: no se permite su uso.# Proyecto-IoT
+Si no es identificado: no se permite su uso.
+
+Rangos:
+0 - 1.50m PELIGRO
+1.50 - 2 WARNING
+2 en delante BIEN
+
+
+
+
+
+
+# Proyecto-IoT
