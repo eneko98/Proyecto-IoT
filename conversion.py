@@ -1,5 +1,5 @@
 import time
-from grove import GroveUltrasonicRanger
+from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 def main():
     sensor = GroveUltrasonicRanger(16)
     while True: #mientras no se de el paro del sistema (cambiar)
