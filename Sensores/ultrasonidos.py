@@ -9,7 +9,7 @@ def main():
    print('{:.4f} m'.format(distance))
    if distance < 1:
       print('Cerca')
-   elif 1 <= distance <= 1.5:
+   elif 1 <= distance <= 1.9:
       print('Medio')
    else:
       print('Lejos')
