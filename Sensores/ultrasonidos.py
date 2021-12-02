@@ -7,8 +7,10 @@ def main():
    distance = sensor.get_distance()
    distance = (float(distance) / 100)
    print('{:.4f} m'.format(distance))
-   if distance < 100:
+   if distance < 1:
       print('Cerca')
+   elif 1 <= distance <= 1.5:
+      print('Medio')
    else:
       print('Lejos')
    time.sleep(1)
