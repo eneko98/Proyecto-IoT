@@ -5,7 +5,8 @@ def main():
  sensor = GroveUltrasonicRanger(16)
  while True:
    distance = sensor.get_distance()
-   print('{} cm'.format(distance))
+   distance = (float(distance) / 100)
+   print('{:.4f} m'.format(distance))
    if distance < 100:
       print('Cerca')
    else:
