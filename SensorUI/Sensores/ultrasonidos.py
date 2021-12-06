@@ -3,7 +3,8 @@ from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 def main():
  # Grove - Ultrasonic Ranger connected to port D16
  sensor = GroveUltrasonicRanger(16)
- while True:
+ counter = 10
+ while (counter < 10):
    distance = sensor.get_distance()
    distance = (float(distance) / 100)
    print('{:.4f} m'.format(distance))
@@ -14,6 +15,7 @@ def main():
    else:
       print('Lejos')
    time.sleep(1)
+   counter = counter + 1
    
 if __name__ == '__main__':
  main()
