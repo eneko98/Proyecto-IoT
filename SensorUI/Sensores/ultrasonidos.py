@@ -1,4 +1,4 @@
-import time
+"""import time
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 def main():
  # Grove - Ultrasonic Ranger connected to port D16
@@ -19,3 +19,5 @@ def main():
    
 if __name__ == '__main__':
  main()
+
+"""
