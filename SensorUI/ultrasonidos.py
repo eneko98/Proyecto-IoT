@@ -12,7 +12,7 @@ def main():
  while (counter < 10):
    distance = sensor.get_distance()
    distance = (float(distance) / 100)
-   print("Distance: %.2f cm" % distance)
+   print("Distance: %.2f m" % distance)
    new_sensor = UltrasonicSensor()
    new_sensor.name = "HC-SR04"
    new_sensor.description = ""
