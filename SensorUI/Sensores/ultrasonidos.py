@@ -1,6 +1,6 @@
 import time
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
-from SensorApp.models import UltrasonicSensor
+from SensorUI.SensorApp.models import UltrasonicSensor
 def main():
  # Grove - Ultrasonic Ranger connected to port D16
  sensor = GroveUltrasonicRanger(16)
