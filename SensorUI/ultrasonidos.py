@@ -19,7 +19,7 @@ def main():
    new_sensor.pin = "16"
    new_sensor.distance = distance
    new_sensor.date = UltrasonicSensor.date
-   print(new_sensor.date)
+   print(str(new_sensor.date))
    new_sensor.save()
    print(new_sensor)
    time.sleep(4)
