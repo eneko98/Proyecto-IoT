@@ -1,5 +1,6 @@
-"""import time
+import time
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
+from SensorApp.models import UltrasonicSensor
 def main():
  # Grove - Ultrasonic Ranger connected to port D16
  sensor = GroveUltrasonicRanger(16)
@@ -7,17 +8,14 @@ def main():
  while (counter < 10):
    distance = sensor.get_distance()
    distance = (float(distance) / 100)
-   print('{:.4f} m'.format(distance))
-   if distance < 1:
-      print('Cerca')
-   elif 1 <= distance <= 1.9:
-      print('Medio')
-   else:
-      print('Lejos')
-   time.sleep(1)
+   new_sensor = UltrasonicSensor()
+   new_sensor.name = "HC-SR04"
+   new_sensor.description = ""
+   new_sensor.pin = "16"
+   new_sensor.distance = distance
+   new_sensor.save()
+   time.sleep(4)
    counter = counter + 1
    
 if __name__ == '__main__':
  main()
-
-"""
