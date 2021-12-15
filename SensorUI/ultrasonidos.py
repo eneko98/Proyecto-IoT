@@ -1,5 +1,9 @@
 import time
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SensorUI.settings")
+import django
+django.setup()
 from SensorApp.models import UltrasonicSensor
 def main():
  # Grove - Ultrasonic Ranger connected to port D16
