@@ -8,7 +8,7 @@ from SensorApp.models import UltrasonicSensor
 def main():
  # Grove - Ultrasonic Ranger connected to port D16
  sensor = GroveUltrasonicRanger(16)
- counter = 10
+ counter = 0
  while (counter < 10):
    distance = sensor.get_distance()
    print("Distance: %.2f cm" % distance)
