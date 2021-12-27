@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 import threading
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 from grove.display.jhd1802 import JHD1802
-from grove.display.jhd1802 import JHD1313
+from grove.display.jhd1313 import JHD1313
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SensorUI.settings")
 import django
