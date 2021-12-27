@@ -95,7 +95,7 @@ def lcds(estado):
   
 
   if(estado==1):
-
+   lcd.clear()
    lcd.setCursor(0, 0)
    lcd.write('ALARMA')
    lcd.setCursor(1, 0)
@@ -103,6 +103,7 @@ def lcds(estado):
    colores_rgb(255,0,0)
 
   elif(estado==2):
+   lcd.clear()
    lcd.setCursor(0, 0)
    lcd.write('WARNING')
    lcd.setCursor(1, 0)
@@ -110,6 +111,7 @@ def lcds(estado):
    colores_rgb(255,173,0)
 
   elif(estado==3):
+   lcd.clear()
    lcd.setCursor(0, 0)
    lcd.write('OK')
    lcd.setCursor(1, 0)
