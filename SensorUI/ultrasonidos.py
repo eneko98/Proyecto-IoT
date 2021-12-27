@@ -17,11 +17,11 @@ def main():
  t.start()
 
  GPIO.setmode(GPIO.BCM)
- GPIO.setup(24, GPIO.IN)
- 
+ GPIO.setup(25, GPIO.IN)
+
  while (True):
   
-   hombre_muerto= GPIO.input(24)
+   hombre_muerto= GPIO.input(25)
 
    if hombre_muerto == False:
       print('pulsado')
