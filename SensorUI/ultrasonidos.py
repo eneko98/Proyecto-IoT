@@ -16,8 +16,17 @@ def main():
  t= threading.Thread(target=hombremuerto)
  t.start()
 
- while (hombremuerto()):
-   print('se cumple')
+ while (True):
+   GPIO.setmode(GPIO.BCM)
+   GPIO.setup(5, GPIO.IN)
+   hombre_muerto= GPIO.input(5)
+
+   if hombre_muerto == False:
+      print('pulsado')
+   else:
+      print('no pulsado')
+
+   #print('se cumple')
    distance = sensor.get_distance()
    distance = (float(distance) / 100)
    print("Distance: %.2f m\n" % distance)
@@ -43,7 +52,7 @@ def hombremuerto():
     if hombre_muerto == False:
       print('pulsado')
       marca_pulsador=1
-      
+
     else:
       print('no pulsado')
       marca_pulsador=0  
