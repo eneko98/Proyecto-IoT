@@ -73,13 +73,19 @@ def lcd_texto(estado):
 
   if(estado==1):
    lcd.setCursor(0, 0)
-   lcd.write('estado1')
+   lcd.write('ALARMA')
+   lcd.setCursor(0, 1)
+   lcd.write('Se encuentra demasiado cerca, situacion de peligro')
   elif(estado==2):
    lcd.setCursor(0, 0)
-   lcd.write('estado2')
+   lcd.write('WARNING')
+   lcd.setCursor(0, 1)
+   lcd.write('Modere la distancia')
   elif(estado==3):
    lcd.setCursor(0, 0)
-   lcd.write('estado3') 
+   lcd.write('OK')
+   lcd.setCursor(0, 1)
+   lcd.write('Distancia correcta') 
 
 if __name__ == '__main__':
  main()
