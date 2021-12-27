@@ -62,9 +62,9 @@ def rangos(distance):
 
   if(distance<=1.5):
     estado=1
-  elif(1.5 < distance <= 2):
+  elif(1.5 < distance <= 2.5):
     estado=2 
-  elif(distance>2):
+  elif(distance>2.5):
     estado=3
   return estado
 
