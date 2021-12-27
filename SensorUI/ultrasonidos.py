@@ -50,7 +50,7 @@ def rangos(distance):
 
   if(distance<=1.5):
     rango=1
-  elif(distance>1.5 and distance<=2):
+  elif(1.5 < distance <= 2):
     rango=2 
   elif(distance>2):
     rango=3
