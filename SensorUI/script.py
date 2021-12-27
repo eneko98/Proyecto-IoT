@@ -23,11 +23,12 @@ def main():
    distance = sensor.get_distance()
    distance = (float(distance) / 100)
    print("Distance: %.2f m" % distance)
-   lcd_texto(estado)
+   
 
    estado= rangos(distance)
    print(estado)
    print("\n")
+   lcd_texto(estado)
 
    new_sensor = UltrasonicSensor()
    new_sensor.name = "HC-SR84"
