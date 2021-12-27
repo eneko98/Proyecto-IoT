@@ -20,7 +20,7 @@ def main():
    print('se cumple')
    distance = sensor.get_distance()
    distance = (float(distance) / 100)
-   print("Distance: %.2f m" % distance)
+   print("Distance: %.2f m\n" % distance)
    new_sensor = UltrasonicSensor()
    new_sensor.name = "HC-SR84"
    new_sensor.description = ""
@@ -40,10 +40,10 @@ def hombremuerto():
   while(True):
     hombre_muerto= GPIO.input(5)
     if hombre_muerto == False:
-      print('pulsado\n')
+      print('pulsado')
       marca_pulsador=1
     else:
-      print('no pulsado\n')
+      print('no pulsado')
       marca_pulsador=0  
     return marca_pulsador
 
