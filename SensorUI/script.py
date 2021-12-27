@@ -50,7 +50,7 @@ def main():
    estado= rangos(distance)
    print(estado)
    print("\n")
-   lcd_texto(estado)
+   lcds(estado)
 
    new_sensor = UltrasonicSensor()
    new_sensor.name = "HC-SR84"
