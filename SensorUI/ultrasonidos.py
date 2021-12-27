@@ -35,13 +35,15 @@ def main():
 
 
 def hombremuerto():
-  GPIO.setmode(GPIO.BCM)
-  GPIO.setup(5, GPIO.IN)
   while(True):
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(5, GPIO.IN)
     hombre_muerto= GPIO.input(5)
+
     if hombre_muerto == False:
       print('pulsado')
       marca_pulsador=1
+      
     else:
       print('no pulsado')
       marca_pulsador=0  
