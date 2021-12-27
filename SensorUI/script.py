@@ -9,11 +9,15 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SensorUI.settings")
 import django
 django.setup()
 from SensorApp.models import UltrasonicSensor
+lcd = JHD1802()
 
 def main():
  # Grove - Ultrasonic Ranger connected to port D16
  sensor = GroveUltrasonicRanger(16)
  counter = 0
+  
+ lcd.setCursor(1, 0)
+ lcd.write('Iniciando...')
 
  t= threading.Thread(target=hombremuerto)
  t.start()
@@ -41,6 +45,7 @@ def main():
    
    time.sleep(4)
 
+ lcd.clear()
 
 def hombremuerto():
   while(True):
@@ -69,7 +74,7 @@ def rangos(distance):
   return estado
 
 def lcd_texto(estado):
-  lcd = JHD1802()
+  
 
   if(estado==1):
    lcd.setCursor(0, 0)
@@ -85,7 +90,7 @@ def lcd_texto(estado):
    lcd.setCursor(0, 0)
    lcd.write('OK')
    lcd.setCursor(1, 0)
-   lcd.write('Distancia correcta') 
+   lcd.write('Distancia OK') 
 
 if __name__ == '__main__':
  main()
