@@ -23,7 +23,7 @@ else:
     import smbus
     rev = GPIO.RPI_REVISION
     if rev == 2 or rev == 3:
-        bus = smbus.SMBus(2)
+        bus = smbus.SMBus(1)
     else:
         bus = smbus.SMBus(0)
 DISPLAY_RGB_ADDR = 0x62
