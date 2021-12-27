@@ -107,14 +107,14 @@ def lcds(estado):
    lcd.write('WARNING')
    lcd.setCursor(1, 0)
    lcd.write('Modere la distancia')
-   colores_rgb(255,0,0)
+   colores_rgb(255,173,0)
 
   elif(estado==3):
    lcd.setCursor(0, 0)
    lcd.write('OK')
    lcd.setCursor(1, 0)
    lcd.write('Distancia OK')
-   colores_rgb(255,0,0) 
+   colores_rgb(0,255,0) 
 
 def colores_rgb(r,g,b):
     bus.write_byte_data(DISPLAY_RGB_ADDR,0,0)
