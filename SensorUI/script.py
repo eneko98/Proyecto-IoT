@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 import threading
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 from grove.display.jhd1802 import JHD1802
-from grove.display.jhd1313 import JHD1313
+#from grove.display.jhd1313 import JHD1313
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SensorUI.settings")
 import django
@@ -13,7 +13,7 @@ from SensorApp.models import UltrasonicSensor
 
 #LCD TEXTO
 lcd = JHD1802()
-lcd_rgb = JHD1313()
+#lcd_rgb = JHD1313()
 
 #LCD RGB
 if sys.platform == 'uwp':
@@ -23,7 +23,7 @@ else:
     import smbus
     rev = GPIO.RPI_REVISION
     if rev == 2 or rev == 3:
-        bus = smbus.SMBus(1)
+        bus = smbus.SMBus(2)
     else:
         bus = smbus.SMBus(0)
 DISPLAY_RGB_ADDR = 0x62
