@@ -75,7 +75,7 @@ def lcd_texto(estado):
    lcd.setCursor(0, 0)
    lcd.write('ALARMA')
    lcd.setCursor(1, 0)
-   lcd.write('Se encuentra demasiado cerca')
+   lcd.write('Peligro, alejese')
   elif(estado==2):
    lcd.setCursor(0, 0)
    lcd.write('WARNING')
