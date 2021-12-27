@@ -79,12 +79,12 @@ def lcd_texto(estado):
   elif(estado==2):
    lcd.setCursor(0, 0)
    lcd.write('WARNING')
-   lcd.setCursor(0, 1)
+   lcd.setCursor(1, 0)
    lcd.write('Modere la distancia')
   elif(estado==3):
    lcd.setCursor(0, 0)
    lcd.write('OK')
-   lcd.setCursor(0, 1)
+   lcd.setCursor(1, 0)
    lcd.write('Distancia correcta') 
 
 if __name__ == '__main__':
