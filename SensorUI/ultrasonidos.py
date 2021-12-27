@@ -27,7 +27,7 @@ def main():
    new_sensor.pin = "16"
    new_sensor.distance = distance
    new_sensor.date = UltrasonicSensor.date
-   print(str(new_sensor.date))
+   #print(str(new_sensor.date))
    new_sensor.save()
    time.sleep(4)
 
@@ -40,8 +40,10 @@ def hombremuerto():
   while(True):
     hombre_muerto= GPIO.input(5)
     if hombre_muerto == False:
+      print('pulsado')
       marca_pulsador=1
     else:
+      print('no pulsado')
       marca_pulsador=0  
     return marca_pulsador
 
