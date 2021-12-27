@@ -20,7 +20,7 @@ def main():
 
    distance = sensor.get_distance()
    distance = (float(distance) / 100)
-   print("Distance: %.2f m\n" % distance)
+   print("Distance: %.2f m" % distance)
    new_sensor = UltrasonicSensor()
    new_sensor.name = "HC-SR84"
    new_sensor.description = ""
@@ -32,6 +32,7 @@ def main():
    time.sleep(4)
    estado= rangos(distance)
    print(estado)
+   print("\n")
 
 
 def hombremuerto():
