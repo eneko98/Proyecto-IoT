@@ -16,10 +16,12 @@ def main():
  t= threading.Thread(target=hombremuerto)
  t.start()
 
+ GPIO.setmode(GPIO.BCM)
+ GPIO.setup(24, GPIO.IN)
+ 
  while (True):
-   GPIO.setmode(GPIO.BCM)
-   GPIO.setup(5, GPIO.IN)
-   hombre_muerto= GPIO.input(5)
+  
+   hombre_muerto= GPIO.input(24)
 
    if hombre_muerto == False:
       print('pulsado')
