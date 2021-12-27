@@ -40,10 +40,10 @@ def hombremuerto():
   while(True):
     hombre_muerto= GPIO.input(5)
     if hombre_muerto == False:
-      print('pulsado')
+      print('pulsado\n')
       marca_pulsador=1
     else:
-      print('no pulsado')
+      print('no pulsado\n')
       marca_pulsador=0  
     return marca_pulsador
 
