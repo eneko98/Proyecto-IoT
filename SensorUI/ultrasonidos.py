@@ -18,7 +18,6 @@ def main():
 
  while (hombremuerto()):
 
-   #print('se cumple')
    distance = sensor.get_distance()
    distance = (float(distance) / 100)
    print("Distance: %.2f m\n" % distance)
@@ -31,8 +30,8 @@ def main():
    #print(str(new_sensor.date))
    new_sensor.save()
    time.sleep(4)
-
- #estado= rangos(distance)
+   estado= rangos(distance)
+ 
 
 
 def hombremuerto():
@@ -54,12 +53,12 @@ def hombremuerto():
 def rangos(distance):
 
   if(distance<=1.5):
-    rango=1
+    estado=1
   elif(1.5 < distance <= 2):
-    rango=2 
+    estado=2 
   elif(distance>2):
-    rango=3
-  return rango
+    estado=3
+  return estado
 
 
 
