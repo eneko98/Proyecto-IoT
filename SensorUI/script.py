@@ -1,4 +1,4 @@
-import time
+import time,sys
 from typing import Match
 import RPi.GPIO as GPIO
 import threading
@@ -9,7 +9,24 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SensorUI.settings")
 import django
 django.setup()
 from SensorApp.models import UltrasonicSensor
+
+#LCD TEXTO
 lcd = JHD1802()
+
+#LCD RGB
+if sys.platform == 'uwp':
+    import winrt_smbus as smbus
+    bus = smbus.SMBus(1)
+else:
+    import smbus
+    rev = GPIO.RPI_REVISION
+    if rev == 2 or rev == 3:
+        bus = smbus.SMBus(1)
+    else:
+        bus = smbus.SMBus(0)
+DISPLAY_RGB_ADDR = 0x62
+DISPLAY_TEXT_ADDR = 0x3e
+
 
 def main():
  # Grove - Ultrasonic Ranger connected to port D16
@@ -67,30 +84,45 @@ def rangos(distance):
 
   if(distance<=1.5):
     estado=1
-  elif(1.5 < distance <= 2.5):
+  elif(1.5 < distance <= 2.3):
     estado=2 
-  elif(distance>2.5):
+  elif(distance>2.3):
     estado=3
   return estado
 
-def lcd_texto(estado):
+def lcds(estado):
   
 
   if(estado==1):
+
    lcd.setCursor(0, 0)
    lcd.write('ALARMA')
    lcd.setCursor(1, 0)
    lcd.write('Peligro, alejese')
+   colores_rgb(255,0,0)
+
   elif(estado==2):
    lcd.setCursor(0, 0)
    lcd.write('WARNING')
    lcd.setCursor(1, 0)
    lcd.write('Modere la distancia')
+   colores_rgb(255,0,0)
+
   elif(estado==3):
    lcd.setCursor(0, 0)
    lcd.write('OK')
    lcd.setCursor(1, 0)
-   lcd.write('Distancia OK') 
+   lcd.write('Distancia OK')
+   colores_rgb(255,0,0) 
+
+def colores_rgb(r,g,b):
+    bus.write_byte_data(DISPLAY_RGB_ADDR,0,0)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,1,0)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,0x08,0xaa)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,4,r)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,3,g)
+    bus.write_byte_data(DISPLAY_RGB_ADDR,2,b)
+
 
 if __name__ == '__main__':
  main()
