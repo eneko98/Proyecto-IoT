@@ -29,10 +29,10 @@ def main():
    new_sensor.date = UltrasonicSensor.date
    #print(str(new_sensor.date))
    new_sensor.save()
-   time.sleep(4)
    estado= rangos(distance)
    print(estado)
    print("\n")
+   time.sleep(4)
 
 
 def hombremuerto():
