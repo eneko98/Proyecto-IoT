@@ -32,7 +32,7 @@ def main():
    new_sensor.save()
    time.sleep(4)
 
- estado= rangos(distance)
+ #estado= rangos(distance)
 
 
 def hombremuerto():
