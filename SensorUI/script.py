@@ -46,14 +46,19 @@ def main():
 
  rearmado= boton_rearme(estado_anterior)"""
 
- t_distancia= threading.Thread(target=get_distancia)
+ """t_distancia= threading.Thread(target=get_distancia)
  t_distancia.start()
 
- distancia_sensor = get_distancia()
+ distancia_sensor = get_distancia()"""
 
  while (hombremuerto()):
 
-   if(distancia_sensor<1.0):
+   medida_distancia = sensor.get_distance()
+   medida_distancia = (float(medida_distancia) / 100)
+
+   print("Distance: %.2f m" % medida_distancia)
+
+   if(medida_distancia<1.0):
      print('hola')
      #rearmado=0
 
@@ -103,13 +108,13 @@ def hombremuerto():
       marca_pulsador=0  
     return marca_pulsador
 
-def get_distancia():
+"""def get_distancia():
 
   while(True):    
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
    print("Distance: %.2f m" % medida_distancia)
-   return(medida_distancia)
+   return(medida_distancia)"""
 
 ######################################################################################
 def rangos(distance):
