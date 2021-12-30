@@ -67,7 +67,7 @@ def main():
    new_sensor.name = "HC-SR04"
    new_sensor.description = ""
    new_sensor.pin = "16"
-   new_sensor.distance = distancia_sensor
+   new_sensor.distance = get_distancia
    new_sensor.date = UltrasonicSensor.date
    #print(str(new_sensor.date))
    new_sensor.save()
