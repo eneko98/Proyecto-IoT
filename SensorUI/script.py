@@ -85,7 +85,7 @@ def main():
    lcd.setCursor(1, 0)
    lcd.write('EMERGENCIA')
    colores_rgb(255,0,0)
-   rearmado=0
+   #rearmado=0
    print('alejese y rearme el sistema')
     #rearme=0"""
 
@@ -183,7 +183,8 @@ def boton_rearme(estado_anterior):
     else:
       print('desarmado, debes rearmar')
       return_rearmado=0
-
+      
+    estado_anterior=return_rearmado
     return return_rearmado
 
 ######################################################################################################
