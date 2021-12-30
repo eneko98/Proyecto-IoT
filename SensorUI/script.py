@@ -41,7 +41,7 @@ def main():
  t_hombremuerto= threading.Thread(target=hombremuerto)
  t_hombremuerto.start()
 
- t_rearme= threading.Thread(target=boton_rearme)
+ t_rearme= threading.Thread(target=boton_rearme(estado_anterior))
  t_rearme.start()
 
  rearmado= boton_rearme(estado_anterior)
