@@ -100,11 +100,11 @@ def hombremuerto():
     hombre_muerto= GPIO.input(6)
 
     if hombre_muerto == False:
-      print('pulsado')
+      #print('pulsado')
       marca_pulsador=1
 
     else:
-      print('no pulsado')
+      #print('no pulsado')
       marca_pulsador=0  
     return marca_pulsador
 
@@ -183,7 +183,7 @@ def boton_rearme(estado_anterior):
     else:
       print('desarmado, debes rearmar')
       return_rearmado=0
-      
+
     estado_anterior=return_rearmado
     return return_rearmado
 
