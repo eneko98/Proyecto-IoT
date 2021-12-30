@@ -1,9 +1,9 @@
-from django.conf.urls import url
-from . import views
-from .views import IndexView, uSensorDetailView
 from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('', IndexView.as_view(), name='index'),
-    path('ultrasonicSensor/<int:pk>/', uSensorDetailView.as_view(), name='uSensor-detail'),
-] 
+    path('', views.index, name='index'),
+    path('camera/', views.camResultados, name='camera'),
+    path('ultrasonic/', views.ultraResultados, name='ultrasonic'),
+    path('soon/', views.soonResultados, name='soon'),
+]

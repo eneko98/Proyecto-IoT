@@ -1,17 +1,19 @@
 from django.http import request
 from django.shortcuts import render
-from .models import UltrasonicSensor
+from .models import UltrasonicSensor, CameraSensor
 
-class IndexView(request):
-    template_name = 'index.html'
-    context_object_name = 'sensors'
+def index(request):
+    return render(request, "index.html")
 
-    def get_queryset(self):
-        return UltrasonicSensor.objects.all()
+def ultraResultados(request):
+    ultraDatos = UltrasonicSensor.objects.all()
+    return render(request, "sonicResultados.html", {"datos" : ultraDatos})
 
-class uSensorDetailView(request):
-    template_name = 'sensor_detail.html'
-    context_object_name = 'sensor'
+def camResultados(request):
+    camDatos = CameraSensor.objects.all()
+    return render(request, "camResultados.html", {"datos" : camDatos})
 
-    def get_queryset(self):
-        return UltrasonicSensor.objects.all()
+def soonResultados(request):
+    """Para el siguiente sensor"""
+    ultraDatos = UltrasonicSensor.objects.all()
+    return render(request, "soonResultados.html", {"datos" : ultraDatos})
