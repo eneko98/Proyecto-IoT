@@ -1,6 +1,6 @@
 from django.http import request
 from django.shortcuts import render
-from .models import UltrasonicSensor, CameraSensor
+from .models import UltrasonicSensor, CameraSensor, lcdSensor
 
 def index(request):
     return render(request, "index.html")
@@ -13,7 +13,7 @@ def camResultados(request):
     camDatos = CameraSensor.objects.all()
     return render(request, "camResultados.html", {"datos" : camDatos})
 
-def soonResultados(request):
+def lcdResultados(request):
     """Para el siguiente sensor"""
-    ultraDatos = UltrasonicSensor.objects.all()
-    return render(request, "soonResultados.html", {"datos" : ultraDatos})
+    lcdDatos = lcdSensor.objects.all()
+    return render(request, "lcdResultados.html", {"datos" : lcdDatos})
