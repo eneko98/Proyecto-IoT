@@ -15,7 +15,7 @@ class UltrasonicSensor(Sensor):
     """
     Ultrasonic Sensor Model
     """
-    name = models.CharField(max_length=100, default="HC-SR04"),
+    name = models.CharField(max_length=100, default="HC-SR04")
     distance = models.DecimalField(max_digits=20, decimal_places=4)
 
 class CameraSensor(Sensor):
