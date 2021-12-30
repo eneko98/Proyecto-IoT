@@ -40,10 +40,11 @@ def main():
   
  t_hombremuerto= threading.Thread(target=hombremuerto)
  t_hombremuerto.start()
+ 
 
- t_rearme= threading.Thread(target=boton_rearme(estado_anterior))
+ t_rearme= threading.Thread(target=lambda: boton_rearme(estado_anterior))
  t_rearme.start()
-
+ #ttt = Thread(target=lambda: thistaginsert(tag))
  rearmado= boton_rearme(estado_anterior)
 
  """t_distancia= threading.Thread(target=get_distancia)
