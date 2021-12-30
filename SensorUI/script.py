@@ -170,7 +170,10 @@ def boton_rearme(estado_anterior):
       print('rearmado')
     elif(marca_rearme==1 and estado_anterior==1):
       return_rearmado=0
-      print('desarmado')  
+      print('desarmado')
+    else:
+      return_rearmado=0
+        
     return return_rearmado
 
 ######################################################################################################
