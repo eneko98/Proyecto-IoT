@@ -59,7 +59,7 @@ def main():
    print("Distance: %.2f m" % medida_distancia)
    
    if(medida_distancia<1.0):
-     print('hola')
+     print('ERROR, DEMASIADO CERCA')
      rearmado=0
 
    estado= rangos(medida_distancia)
@@ -78,19 +78,19 @@ def main():
    
    time.sleep(4)
 
- """while(hombremuerto()==0 or rearmado==0):
-    lcd.clear()
-    lcd.setCursor(0, 0)
-    lcd.write('PARADA DE')
-    lcd.setCursor(1, 0)
-    lcd.write('EMERGENCIA')
-    colores_rgb(255,0,0)
-    #rearmado=0
-    print('alejese y rearme el sistema')
+while(hombremuerto()==0 or rearmado==0):
+  lcd.clear()
+  lcd.setCursor(0, 0)
+  lcd.write('PARADA DE')
+  lcd.setCursor(1, 0)
+  lcd.write('EMERGENCIA')
+  colores_rgb(255,0,0)
+  rearmado=0
+  print('alejese y rearme el sistema')
     #rearme=0"""
 
 
- lcd.clear()
+lcd.clear()
 
 #############################################################################################
 def hombremuerto():
