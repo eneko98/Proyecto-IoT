@@ -62,7 +62,7 @@ def main():
      print('hola')
      rearmado=0
 
-   estado= rangos(distancia_sensor)
+   estado= rangos(medida_distancia)
    print(estado)
    print("\n")
    lcds(estado)
