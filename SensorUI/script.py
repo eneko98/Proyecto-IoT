@@ -32,7 +32,7 @@ else:
 DISPLAY_RGB_ADDR = 0x62
 
 def main():
- rearme_anterior=0
+ estado_anterior=0
  counter = 0
   
  lcd.setCursor(1, 0)
@@ -41,10 +41,10 @@ def main():
  t_hombremuerto= threading.Thread(target=hombremuerto)
  t_hombremuerto.start()
 
- t_rearme= threading.Thread(target=rearme)
+ t_rearme= threading.Thread(target=boton_rearme)
  t_rearme.start()
 
- rearmado= rearme(rearme_anterior)
+ rearmado= boton_rearme(estado_anterior)
 
  t_distancia= threading.Thread(target=distancia)
  t_distancia.start()
@@ -158,19 +158,20 @@ def colores_rgb(r,g,b):
     bus.write_byte_data(DISPLAY_RGB_ADDR,2,b)
 
 #######################################################################################################
-def rearme(rearme_anterior):
+def boton_rearme(estado_anterior):
   GPIO.setmode(GPIO.BCM)
   GPIO.setup(19, GPIO.IN)
   while(True):
     
     marca_rearme= GPIO.input(19)
-    if(marca_rearme==1 and rearme_anterior==0):
-      rearmado=1
+
+    if(marca_rearme==1 and estado_anterior==0):
+      return_rearmado=1
       print('rearmado')
-    elif(marca_rearme==1 and rearme_anterior==1):
-      rearmado=0
+    elif(marca_rearme==1 and estado_anterior==1):
+      return_rearmado=0
       print('desarmado')  
-    return rearmado
+    return return_rearmado
 
 ######################################################################################################
 if __name__ == '__main__':
