@@ -31,8 +31,6 @@ else:
         bus = smbus.SMBus(0)
 DISPLAY_RGB_ADDR = 0x62
 
-
-
 def main():
  estado_anterior=0
  counter = 0
@@ -55,8 +53,9 @@ def main():
 
  while (hombremuerto() and rearmado==1):
 
-   if(distancia_sensor<1):
-     rearmado=0
+   if(distancia_sensor<1.0):
+     print('hola')
+     #rearmado=0
 
    estado= rangos(distancia_sensor)
    print(estado)
