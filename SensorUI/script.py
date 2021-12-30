@@ -177,6 +177,9 @@ def boton_rearme(estado_anterior):
     elif(marca_rearme==1 and estado_anterior==1):
       return_rearmado=0
       print('desarmado')
+    elif(marca_rearme==0 and estado_anterior==1):
+      print('rearmadox2')
+      return_rearmado=1
     else:
       print('desarmado, debes rearmar')
       return_rearmado=0
