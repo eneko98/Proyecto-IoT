@@ -41,10 +41,10 @@ def main():
  t_hombremuerto= threading.Thread(target=hombremuerto)
  t_hombremuerto.start()
 
- """t_rearme= threading.Thread(target=boton_rearme(estado_anterior))
+ t_rearme= threading.Thread(target=boton_rearme(estado_anterior))
  t_rearme.start()
 
- rearmado= boton_rearme(estado_anterior)"""
+ rearmado= boton_rearme(estado_anterior)
 
  """t_distancia= threading.Thread(target=get_distancia)
  t_distancia.start()
@@ -57,7 +57,7 @@ def main():
    medida_distancia = (float(medida_distancia) / 100)
 
    print("Distance: %.2f m" % medida_distancia)
-
+   
    if(medida_distancia<1.0):
      print('hola')
      #rearmado=0
@@ -164,7 +164,7 @@ def colores_rgb(r,g,b):
     bus.write_byte_data(DISPLAY_RGB_ADDR,2,b)
 
 #######################################################################################################
-"""def boton_rearme(estado_anterior):
+def boton_rearme(estado_anterior):
   GPIO.setmode(GPIO.BCM)
   GPIO.setup(19, GPIO.IN)
 
@@ -181,7 +181,7 @@ def colores_rgb(r,g,b):
     else:
       return_rearmado=0
 
-    return return_rearmado"""
+    return return_rearmado
 
 ######################################################################################################
 if __name__ == '__main__':
