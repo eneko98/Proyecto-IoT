@@ -1,8 +1,18 @@
-{% load static %}
-<ul>
-  {% for sensor in object_list %}
-  <li>
-    <a href="{% url 'uSensor-detail' sensor.pk %}">{{sensor.name}}</a>
-  </li>
-  {% endfor %}
-</ul>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Índice</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="columns-3 max-w-4xl mx-auto mt-4">
+        <a href="./ultrasonic"><img class="border w-full aspect-square" src="https://img.gkbcdn.com/p/2015-12-17/hc-sr04-ultrasonic-sensor-distance-measuring-module-3-3v---5v-compatible-for-arduino-nodemcu-1571976572471._w500_p1_.jpg" /></a>
+        <a href="./camera"><img class="border w-full aspect-square" src="https://sc04.alicdn.com/kf/H4ad03ada6bfc4182bfcc1a0ccd67bc1fe.jpg" /></a>
+        <a href="./soon"><img class="border w-full aspect-square" src="https://www.nopcommerce.com/images/thumbs/0005720_coming-soon-page_550.jpeg" /></a>
+    </div>
+</body>
+</html>
