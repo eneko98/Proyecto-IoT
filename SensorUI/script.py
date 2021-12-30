@@ -15,7 +15,7 @@ from SensorApp.models import UltrasonicSensor
 lcd = JHD1802()
 
 #ULTRASONIDOS
-sensor = GroveUltrasonicRanger(17)
+sensor = GroveUltrasonicRanger(16)
 #lcd_rgb = JHD1313()
 
 #LCD RGB
@@ -30,10 +30,11 @@ else:
     else:
         bus = smbus.SMBus(0)
 DISPLAY_RGB_ADDR = 0x62
-estado_anterior=0
+
+
 
 def main():
- 
+ estado_anterior=0
  counter = 0
   
  lcd.setCursor(1, 0)
@@ -42,7 +43,7 @@ def main():
  t_hombremuerto= threading.Thread(target=hombremuerto)
  t_hombremuerto.start()
 
- t_rearme= threading.Thread(target=boton_rearme)
+ t_rearme= threading.Thread(target=boton_rearme(estado_anterior))
  t_rearme.start()
 
  rearmado= boton_rearme(estado_anterior)
@@ -160,8 +161,9 @@ def colores_rgb(r,g,b):
 
 #######################################################################################################
 def boton_rearme(estado_anterior):
-  #GPIO.setmode(GPIO.BCM)
+  GPIO.setmode(GPIO.BCM)
   GPIO.setup(19, GPIO.IN)
+
   while(True):
     
     marca_rearme= GPIO.input(19)
