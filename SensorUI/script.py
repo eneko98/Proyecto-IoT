@@ -165,11 +165,11 @@ def colores_rgb(r,g,b):
 
 #######################################################################################################
 def boton_rearme(estado_anterior):
-  GPIO.setmode(GPIO.BCM)
-  GPIO.setup(19, GPIO.IN)
-
+ 
   while(True):
-    
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(19, GPIO.IN)
+    print('entrado')
     marca_rearme= GPIO.input(19)
 
     if(marca_rearme==1 and estado_anterior==0):
