@@ -30,24 +30,32 @@ DISPLAY_RGB_ADDR = 0x62
 
 
 def main():
- # Grove - Ultrasonic Ranger connected to port D16
+
  sensor = GroveUltrasonicRanger(16)
  counter = 0
   
  lcd.setCursor(1, 0)
  lcd.write('Iniciando...')
+  
+ t_hombremuerto= threading.Thread(target=hombremuerto)
+ t_hombremuerto.start()
 
- t= threading.Thread(target=hombremuerto)
- t.start()
+ t_rearme= threading.Thread(target=rearme)
+ t_rearme.start()
 
- while (hombremuerto()):
+ rearmado= rearme()
 
-   distance = sensor.get_distance()
-   distance = (float(distance) / 100)
-   print("Distance: %.2f m" % distance)
-   
+ t_distancia= threading.Thread(target=distancia)
+ t_distancia.start()
 
-   estado= rangos(distance)
+ distancia_sensor = distancia()
+
+ while (hombremuerto() and rearmado==1):
+
+   if(distancia_sensor<1):
+     rearmado=0
+
+   estado= rangos(distancia_sensor)
    print(estado)
    print("\n")
    lcds(estado)
@@ -56,15 +64,28 @@ def main():
    new_sensor.name = "HC-SR84"
    new_sensor.description = ""
    new_sensor.pin = "16"
-   new_sensor.distance = distance
+   new_sensor.distance = distancia_sensor
    new_sensor.date = UltrasonicSensor.date
    #print(str(new_sensor.date))
    new_sensor.save()
    
    time.sleep(4)
 
+ while(hombremuerto()==0 or rearmado==0):
+    lcd.clear()
+    lcd.setCursor(0, 0)
+    lcd.write('PARADA DE')
+    lcd.setCursor(1, 0)
+    lcd.write('EMERGENCIA')
+    colores_rgb(255,0,0)
+    rearmado=0
+    print('alejese y rearme el sistema')
+    #rearme=0
+
+
  lcd.clear()
 
+#############################################################################################
 def hombremuerto():
   while(True):
     GPIO.setmode(GPIO.BCM)
@@ -80,7 +101,15 @@ def hombremuerto():
       marca_pulsador=0  
     return marca_pulsador
 
+def distancia():
 
+  while(True):    
+   medida_distancia = sensor.get_distance()
+   medida_distancia = (float(medida_distancia) / 100)
+   print("Distance: %.2f m" % medida_distancia)
+   return(medida_distancia)
+
+######################################################################################
 def rangos(distance):
 
   if(distance<=1.5):
@@ -91,9 +120,9 @@ def rangos(distance):
     estado=3
   return estado
 
+#############################################################################################
 def lcds(estado):
   
-
   if(estado==1):
    lcd.clear()
    lcd.setCursor(0, 0)
@@ -118,6 +147,7 @@ def lcds(estado):
    lcd.write('Distancia OK')
    colores_rgb(0,255,0) 
 
+
 def colores_rgb(r,g,b):
     bus.write_byte_data(DISPLAY_RGB_ADDR,0,0)
     bus.write_byte_data(DISPLAY_RGB_ADDR,1,0)
@@ -126,6 +156,18 @@ def colores_rgb(r,g,b):
     bus.write_byte_data(DISPLAY_RGB_ADDR,3,g)
     bus.write_byte_data(DISPLAY_RGB_ADDR,2,b)
 
+#######################################################################################################
+def rearme():
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(19, GPIO.IN)
+  while(True):
+    marca_rearme= GPIO.input(19)
+    if(marca_rearme==1):
+      print('rearmado')
+    else:
+      print('desarmado')  
+    return marca_rearme
 
+######################################################################################################
 if __name__ == '__main__':
  main()
