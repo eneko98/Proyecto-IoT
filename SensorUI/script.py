@@ -32,7 +32,7 @@ else:
 DISPLAY_RGB_ADDR = 0x62
 
 def main():
- estado_anterior=0
+ estado_anterior=1
  counter = 0
   
  lcd.setCursor(1, 0)
