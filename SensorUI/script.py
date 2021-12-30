@@ -30,9 +30,10 @@ else:
     else:
         bus = smbus.SMBus(0)
 DISPLAY_RGB_ADDR = 0x62
+estado_anterior=0
 
 def main():
- estado_anterior=0
+ 
  counter = 0
   
  lcd.setCursor(1, 0)
@@ -173,7 +174,7 @@ def boton_rearme(estado_anterior):
       print('desarmado')
     else:
       return_rearmado=0
-        
+
     return return_rearmado
 
 ######################################################################################################
