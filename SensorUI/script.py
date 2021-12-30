@@ -80,7 +80,7 @@ def main():
     lcd.setCursor(1, 0)
     lcd.write('EMERGENCIA')
     colores_rgb(255,0,0)
-    rearmado=0
+    #rearmado=0
     print('alejese y rearme el sistema')
     #rearme=0
 
