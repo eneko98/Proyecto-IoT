@@ -61,7 +61,7 @@ def main():
    lcds(estado)
 
    new_sensor = UltrasonicSensor()
-   new_sensor.name = "HC-SR84"
+   new_sensor.name = "HC-SR04"
    new_sensor.description = ""
    new_sensor.pin = "16"
    new_sensor.distance = distancia_sensor
