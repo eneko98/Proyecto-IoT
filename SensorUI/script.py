@@ -13,6 +13,9 @@ from SensorApp.models import UltrasonicSensor
 
 #LCD TEXTO
 lcd = JHD1802()
+
+#ULTRASONIDOS
+sensor = GroveUltrasonicRanger(16)
 #lcd_rgb = JHD1313()
 
 #LCD RGB
@@ -31,7 +34,6 @@ DISPLAY_RGB_ADDR = 0x62
 
 def main():
 
- sensor = GroveUltrasonicRanger(16)
  counter = 0
   
  lcd.setCursor(1, 0)
