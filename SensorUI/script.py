@@ -78,15 +78,15 @@ def main():
    
    time.sleep(4)
 
-while(hombremuerto()==0 or rearmado==0):
-  lcd.clear()
-  lcd.setCursor(0, 0)
-  lcd.write('PARADA DE')
-  lcd.setCursor(1, 0)
-  lcd.write('EMERGENCIA')
-  colores_rgb(255,0,0)
-  rearmado=0
-  print('alejese y rearme el sistema')
+ while(hombremuerto()==0 or rearmado==0):
+   lcd.clear()
+   lcd.setCursor(0, 0)
+   lcd.write('PARADA DE')
+   lcd.setCursor(1, 0)
+   lcd.write('EMERGENCIA')
+   colores_rgb(255,0,0)
+   rearmado=0
+   print('alejese y rearme el sistema')
     #rearme=0"""
 
 
