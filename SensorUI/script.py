@@ -51,7 +51,7 @@ def main():
 
  distancia_sensor = get_distancia()"""
 
- while (hombremuerto()):
+ while (hombremuerto() and rearmado==1):
 
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
@@ -60,7 +60,7 @@ def main():
    
    if(medida_distancia<1.0):
      print('hola')
-     #rearmado=0
+     rearmado=0
 
    estado= rangos(distancia_sensor)
    print(estado)
@@ -109,7 +109,6 @@ def hombremuerto():
     return marca_pulsador
 
 """def get_distancia():
-
   while(True):    
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
