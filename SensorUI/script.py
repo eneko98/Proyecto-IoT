@@ -48,10 +48,10 @@ def main():
 
  rearmado= boton_rearme(estado_anterior)
 
- t_distancia= threading.Thread(target=distancia)
+ t_distancia= threading.Thread(target=get_distancia)
  t_distancia.start()
 
- distancia_sensor = distancia()
+ distancia_sensor = get_distancia()
 
  while (hombremuerto() and rearmado==1):
 
@@ -104,7 +104,7 @@ def hombremuerto():
       marca_pulsador=0  
     return marca_pulsador
 
-def distancia():
+def get_distancia():
 
   while(True):    
    medida_distancia = sensor.get_distance()
