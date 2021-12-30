@@ -178,6 +178,7 @@ def boton_rearme(estado_anterior):
       return_rearmado=0
       print('desarmado')
     else:
+      print('desarmado, debes rearmar')
       return_rearmado=0
 
     return return_rearmado
