@@ -5,7 +5,7 @@ from decimal import Decimal
 class Sensor(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=255)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     pin = models.IntegerField()
 
     class Meta:
@@ -22,6 +22,7 @@ class CameraSensor(Sensor):
     """
     Camera Sensor Model
     """
+    imagen = models.ImageField(upload_to='media/', null=True, blank=True)
     
 class lcdSensor(Sensor):
     """

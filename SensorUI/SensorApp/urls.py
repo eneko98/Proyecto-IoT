@@ -6,4 +6,5 @@ urlpatterns = [
     path('camera/', views.camResultados, name='camera'),
     path('ultrasonic/', views.ultraResultados, name='ultrasonic'),
     path('lcd/', views.lcdResultados, name='lcd'),
+    path('live/', views.live, name='live'),
 ]
