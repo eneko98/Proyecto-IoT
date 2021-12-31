@@ -83,7 +83,7 @@ def main():
   if(hombremuerto()==0 or rearmado==0):
    contador= contador+1
 
-   buzzer(contador)
+   buzzer_sonido(contador)
 
    rearmado=0
    time.sleep(1)
@@ -183,7 +183,7 @@ def boton_rearme(estado_anterior):
     return_rearmado= estado_anterior
   return return_rearmado
 
-def buzzer(contador):
+def buzzer_sonido (contador):
  
   CHORDS = [upmBuzzer.BUZZER_DO, upmBuzzer.BUZZER_RE, upmBuzzer.BUZZER_MI, upmBuzzer.BUZZER_FA, upmBuzzer.BUZZER_SOL, upmBuzzer.BUZZER_LA, upmBuzzer.BUZZER_SI]
   for contador in range(0, len(CHORDS)):
