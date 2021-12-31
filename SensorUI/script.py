@@ -43,10 +43,9 @@ def main():
  t_hombremuerto.start()
  
 
- t_rearme= threading.Thread(target=boton_rearme)
- t_rearme.start()
+ #t_rearme= threading.Thread(target=boton_rearme)
+ #t_rearme.start()
  #ttt = Thread(target=lambda: thistaginsert(tag))
- rearmado= boton_rearme()
 
  """t_distancia= threading.Thread(target=get_distancia)
  t_distancia.start()
@@ -60,7 +59,8 @@ def main():
  while(salir==0):
   
   salir= GPIO.input(26) 
-
+  rearmado= boton_rearme()
+  
   if (hombremuerto() and rearmado==1):
 
    medida_distancia = sensor.get_distance()
@@ -97,7 +97,6 @@ def main():
    lcd.write('EMERGENCIA')
    colores_rgb(255,0,0)
    #rearmado=0
-   print('desarmado')
    print('alejese y rearme el sistema')
     #rearme=0"""
 
