@@ -60,7 +60,7 @@ def main():
  while(salir==0):
   estado_anterior=rearmado
   print(estado_anterior)
-  
+
   GPIO.setmode(GPIO.BCM)
   GPIO.setup(23, GPIO.IN)
   marca= GPIO.input(23)
@@ -191,22 +191,7 @@ def boton_rearme(estado_anterior):
     return_rearmado=1
   else:
     return_rearmado= estado_anterior
-    """print('entrado')
-    marca_rearme= GPIO.input(19)
-
-    if(marca_rearme==1 and estado_anterior==0):
-      return_rearmado=1
-      print('rearmado')
-    elif(marca_rearme==1 and estado_anterior==1):
-      return_rearmado=0
-      print('desarmado')
-    elif(marca_rearme==0 and estado_anterior==1):
-      print('rearmadox2')
-      return_rearmado=1
-    else:
-      print('desarmado, debes rearmar')
-      return_rearmado=0"""""
-    return return_rearmado
+  return return_rearmado
 
 ######################################################################################################
 if __name__ == '__main__':
