@@ -37,7 +37,7 @@ def main():
  lcd.setCursor(1, 0)
  lcd.write('Iniciando...')
  time.sleep(5)
- 
+
  t_hombremuerto= threading.Thread(target=hombremuerto)
  t_hombremuerto.start()
  
@@ -51,8 +51,9 @@ def main():
  t_distancia.start()
 
  distancia_sensor = get_distancia()"""
+ while(True):
 
- while (hombremuerto() and rearmado==1):
+  if (hombremuerto() and rearmado==1):
 
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
@@ -78,7 +79,7 @@ def main():
    
    time.sleep(4)
 
- while(hombremuerto()==0 or rearmado==0):
+  if(hombremuerto()==0 or rearmado==0):
    lcd.clear()
    lcd.setCursor(0, 0)
    lcd.write('PARADA DE')
