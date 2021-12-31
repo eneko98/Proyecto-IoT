@@ -4,6 +4,8 @@ import RPi.GPIO as GPIO
 import threading
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 from grove.display.jhd1802 import JHD1802
+from mraa import getGpioLookup
+from upm import pyupm_buzzer as upmBuzzer
 #from grove.display.jhd1313 import JHD1313
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SensorUI.settings")
@@ -46,14 +48,15 @@ def main():
  salir= GPIO.input(26) 
 
  while(salir==0):
-
+  
   estado_anterior=rearmado
   
   salir= GPIO.input(26) 
   rearmado= boton_rearme(estado_anterior)
   
   if (hombremuerto() and rearmado==1):
-   
+   contador=0
+
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
 
@@ -78,6 +81,10 @@ def main():
    time.sleep(3)
 
   if(hombremuerto()==0 or rearmado==0):
+   contador= contador+1
+
+   buzzer(contador)
+   
    rearmado=0
    time.sleep(1)
    lcd.clear()
@@ -176,6 +183,15 @@ def boton_rearme(estado_anterior):
     return_rearmado= estado_anterior
   return return_rearmado
 
+def buzzer(contador):
+  buzzer = upmBuzzer.Buzzer(getGpioLookup('GPIO12'))
+ 
+  CHORDS = [upmBuzzer.BUZZER_DO, upmBuzzer.BUZZER_RE, upmBuzzer.BUZZER_MI, upmBuzzer.BUZZER_FA, upmBuzzer.BUZZER_SOL, upmBuzzer.BUZZER_LA, upmBuzzer.BUZZER_SI]
+  for contador in range(0, len(CHORDS)):
+    buzzer.playSound(CHORDS[contador], 500000)
+    time.sleep(0.1)
+ 
+  #del buzzer
 ######################################################################################################
 if __name__ == '__main__':
  main()
