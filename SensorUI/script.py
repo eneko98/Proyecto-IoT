@@ -60,7 +60,7 @@ def main():
   
   salir= GPIO.input(26) 
   rearmado= boton_rearme(estado_anterior)
-  
+  print(rearmado)
   if (hombremuerto() and rearmado==1):
 
    medida_distancia = sensor.get_distance()
@@ -73,8 +73,7 @@ def main():
      rearmado=0
 
    estado= rangos(medida_distancia)
-   print(estado)
-   print("\n")
+   
    lcds(estado)
 
    new_sensor = UltrasonicSensor()
