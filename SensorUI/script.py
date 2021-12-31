@@ -51,15 +51,10 @@ def main():
  t_distancia.start()
 
  distancia_sensor = get_distancia()"""
- while(True):
+ while(salir==0):
   GPIO.setmode(GPIO.BCM)
   GPIO.setup(26, GPIO.IN)
-  salir= GPIO.input(26)
-
-  if(salir==1):
-    print('funciono')
-  else:
-    print('no funciono')  
+  salir= GPIO.input(26) 
 
   if (hombremuerto() and rearmado==1):
 
