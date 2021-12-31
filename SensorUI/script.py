@@ -40,24 +40,13 @@ def main():
  time.sleep(5)
  estado_anterior=1
  rearmado=1
- """t_hombremuerto= threading.Thread(target=hombremuerto)
- t_hombremuerto.start()"""
- 
-
- #t_rearme= threading.Thread(target=boton_rearme)
- #t_rearme.start()
- #ttt = Thread(target=lambda: thistaginsert(tag))
-
- """t_distancia= threading.Thread(target=get_distancia)
- t_distancia.start()
-
- distancia_sensor = get_distancia()"""
 
  GPIO.setmode(GPIO.BCM)
  GPIO.setup(26, GPIO.IN)
  salir= GPIO.input(26) 
 
  while(salir==0):
+
   estado_anterior=rearmado
   print(estado_anterior)
 
@@ -74,7 +63,7 @@ def main():
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
 
-   print("Distance: %.2f m" % medida_distancia)
+   print("Distancia a la que se encuentra: %.2f m" % medida_distancia)
    
    if(medida_distancia<1.0):
      print('ERROR, DEMASIADO CERCA')
@@ -104,9 +93,9 @@ def main():
    lcd.write('EMERGENCIA')
    colores_rgb(255,0,0)
    #rearmado=0
-   print('alejese y rearme el sistema')
+   print('Alejese y rearme el sistema')
     #rearme=0"""
-  
+  print('----------------------------------------------------')
   
 
 lcd.clear()
@@ -119,10 +108,9 @@ def hombremuerto():
   hombre_muerto= GPIO.input(5)
 
   if hombre_muerto == True:
-    print('pulsado')
     marca_pulsador=1
   else:
-    print('no pulsado')
+    print('Has soltado el hombre muerto')
     marca_pulsador=0  
   return marca_pulsador
 
@@ -187,7 +175,7 @@ def boton_rearme(estado_anterior):
   GPIO.setup(23, GPIO.IN)
   marca_rearme= GPIO.input(23)
   if(marca_rearme==1):
-    print('rearme')
+    print('Sistema rearmado')
     return_rearmado=1
   else:
     return_rearmado= estado_anterior
