@@ -97,6 +97,7 @@ def main():
    lcd.write('EMERGENCIA')
    colores_rgb(255,0,0)
    #rearmado=0
+   print('desarmado')
    print('alejese y rearme el sistema')
     #rearme=0"""
 
@@ -175,12 +176,17 @@ def colores_rgb(r,g,b):
 
 #######################################################################################################
 def boton_rearme():
-  estado_anterior=1
+
   print('me repito')
   while(True):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(19, GPIO.IN)
-    print('entrado')
+    marca_rearme= GPIO.input(19)
+    if(marca_rearme==1):
+      print('rearme')
+      return_rearmado=1
+
+    """print('entrado')
     marca_rearme= GPIO.input(19)
 
     if(marca_rearme==1 and estado_anterior==0):
@@ -194,9 +200,8 @@ def boton_rearme():
       return_rearmado=1
     else:
       print('desarmado, debes rearmar')
-      return_rearmado=0
+      return_rearmado=0"""""
 
-    estado_anterior=return_rearmado
     return return_rearmado
 
 ######################################################################################################
