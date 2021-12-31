@@ -36,6 +36,7 @@ def main():
   
  lcd.setCursor(1, 0)
  lcd.write('Iniciando...')
+ colores_rgb(255,255,255)
  time.sleep(5)
 
  t_hombremuerto= threading.Thread(target=hombremuerto)
@@ -51,9 +52,13 @@ def main():
  t_distancia.start()
 
  distancia_sensor = get_distancia()"""
+
+ GPIO.setmode(GPIO.BCM)
+ GPIO.setup(26, GPIO.IN)
+ salir= GPIO.input(26) 
+
  while(salir==0):
-  GPIO.setmode(GPIO.BCM)
-  GPIO.setup(26, GPIO.IN)
+  
   salir= GPIO.input(26) 
 
   if (hombremuerto() and rearmado==1):
