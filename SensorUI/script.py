@@ -102,11 +102,11 @@ def hombremuerto():
     hombre_muerto= GPIO.input(6)
 
     if hombre_muerto == False:
-      #print('pulsado')
+      print('pulsado')
       marca_pulsador=1
 
     else:
-      #print('no pulsado')
+      print('no pulsado')
       marca_pulsador=0  
     return marca_pulsador
 
