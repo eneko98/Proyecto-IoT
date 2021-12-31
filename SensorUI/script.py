@@ -106,19 +106,18 @@ lcd.clear()
 
 #############################################################################################
 def hombremuerto():
-  while(True):
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(5, GPIO.IN)
-    hombre_muerto= GPIO.input(5)
+  
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(5, GPIO.IN)
+  hombre_muerto= GPIO.input(5)
 
-    if hombre_muerto == True:
-      print('pulsado')
-      marca_pulsador=1
-
-    else:
-      print('no pulsado')
-      marca_pulsador=0  
-    return marca_pulsador
+  if hombre_muerto == True:
+    print('pulsado')
+    marca_pulsador=1
+  else:
+    print('no pulsado')
+    marca_pulsador=0  
+  return marca_pulsador
 
 """def get_distancia():
   while(True):    
