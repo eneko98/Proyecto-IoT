@@ -39,6 +39,7 @@ def main():
  colores_rgb(255,255,255)
  time.sleep(5)
  estado_anterior=1
+ rearmado=1
  """t_hombremuerto= threading.Thread(target=hombremuerto)
  t_hombremuerto.start()"""
  
@@ -57,6 +58,8 @@ def main():
  salir= GPIO.input(26) 
 
  while(salir==0):
+  estado_anterior=rearmado
+  print(estado_anterior)
   
   GPIO.setmode(GPIO.BCM)
   GPIO.setup(23, GPIO.IN)
@@ -67,7 +70,7 @@ def main():
   rearmado= boton_rearme(estado_anterior)
   print(rearmado)
   if (hombremuerto() and rearmado==1):
-
+   
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
 
@@ -103,8 +106,8 @@ def main():
    #rearmado=0
    print('alejese y rearme el sistema')
     #rearme=0"""
-
-  estado_anterior=rearmado
+  
+  
 
 lcd.clear()
 
