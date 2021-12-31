@@ -33,12 +33,11 @@ DISPLAY_RGB_ADDR = 0x62
 
 
 def main():
-
- counter = 0
   
  lcd.setCursor(1, 0)
  lcd.write('Iniciando...')
-  
+ time.sleep(5)
+ 
  t_hombremuerto= threading.Thread(target=hombremuerto)
  t_hombremuerto.start()
  
@@ -75,12 +74,11 @@ def main():
    new_sensor.pin = "16"
    new_sensor.distance = medida_distancia
    new_sensor.date = UltrasonicSensor.date
-   #print(str(new_sensor.date))
    new_sensor.save()
    
    time.sleep(4)
 
- if(hombremuerto()==0 or rearmado==0):
+ while(hombremuerto()==0 or rearmado==0):
    lcd.clear()
    lcd.setCursor(0, 0)
    lcd.write('PARADA DE')
