@@ -80,7 +80,7 @@ def main():
    
    time.sleep(4)
 
- while(hombremuerto()==0 or rearmado==0):
+ if(hombremuerto()==0 or rearmado==0):
    lcd.clear()
    lcd.setCursor(0, 0)
    lcd.write('PARADA DE')
