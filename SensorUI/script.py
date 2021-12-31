@@ -48,16 +48,10 @@ def main():
  while(salir==0):
 
   estado_anterior=rearmado
-  print(estado_anterior)
-
-  GPIO.setmode(GPIO.BCM)
-  GPIO.setup(23, GPIO.IN)
-  marca= GPIO.input(23)
-  print(marca)
-
+  
   salir= GPIO.input(26) 
   rearmado= boton_rearme(estado_anterior)
-  print(rearmado)
+  
   if (hombremuerto() and rearmado==1):
    
    medida_distancia = sensor.get_distance()
@@ -99,7 +93,7 @@ def main():
   
 
 lcd.clear()
-
+print('EXIT...')
 #############################################################################################
 def hombremuerto():
   
