@@ -13,7 +13,6 @@ from SensorApp.models import UltrasonicSensor
 
 #LCD TEXTO
 lcd = JHD1802()
-
 #ULTRASONIDOS
 sensor = GroveUltrasonicRanger(16)
 #lcd_rgb = JHD1313()
@@ -30,10 +29,11 @@ else:
     else:
         bus = smbus.SMBus(0)
 DISPLAY_RGB_ADDR = 0x62
-estado_anterior=1
+
+
 
 def main():
- 
+
  counter = 0
   
  lcd.setCursor(1, 0)
@@ -166,7 +166,8 @@ def colores_rgb(r,g,b):
 
 #######################################################################################################
 def boton_rearme():
- 
+  estado_anterior=1
+  print('me repito')
   while(True):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(19, GPIO.IN)
