@@ -188,11 +188,11 @@ def buzzer_sonido (contador):
   CHORDS = [upmBuzzer.BUZZER_DO, upmBuzzer.BUZZER_RE, upmBuzzer.BUZZER_MI, 
         upmBuzzer.BUZZER_FA, upmBuzzer.BUZZER_SOL, upmBuzzer.BUZZER_LA, 
         upmBuzzer.BUZZER_SI]
-  for contador in range(0, len(CHORDS)):
+  for i in range(0, len(CHORDS)):
     buzzer.playSound(CHORDS[contador], 500000)
     time.sleep(0.1)
- 
-  #del buzzer
+  
+  del buzzer
 ######################################################################################################
 if __name__ == '__main__':
  main()
