@@ -65,7 +65,7 @@ def main():
 
   salir= GPIO.input(26) 
   rearmado= boton_rearme(estado_anterior)
-  #print(rearmado)
+  print(rearmado)
   if (hombremuerto() and rearmado==1):
 
    medida_distancia = sensor.get_distance()
