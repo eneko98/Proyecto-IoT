@@ -101,7 +101,7 @@ def hombremuerto():
     GPIO.setup(5, GPIO.IN)
     hombre_muerto= GPIO.input(5)
 
-    if hombre_muerto == False:
+    if hombre_muerto == True:
       print('pulsado')
       marca_pulsador=1
 
