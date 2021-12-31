@@ -98,8 +98,8 @@ lcd.clear()
 def hombremuerto():
   while(True):
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(6, GPIO.IN)
-    hombre_muerto= GPIO.input(6)
+    GPIO.setup(5, GPIO.IN)
+    hombre_muerto= GPIO.input(5)
 
     if hombre_muerto == False:
       print('pulsado')
