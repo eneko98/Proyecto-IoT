@@ -58,9 +58,14 @@ def main():
 
  while(salir==0):
   
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(23, GPIO.IN)
+  marca= GPIO.input(23)
+  print(marca)
+
   salir= GPIO.input(26) 
   rearmado= boton_rearme(estado_anterior)
-  print(rearmado)
+  #print(rearmado)
   if (hombremuerto() and rearmado==1):
 
    medida_distancia = sensor.get_distance()
@@ -176,8 +181,8 @@ def colores_rgb(r,g,b):
 def boton_rearme(estado_anterior):
 
   GPIO.setmode(GPIO.BCM)
-  GPIO.setup(19, GPIO.IN)
-  marca_rearme= GPIO.input(19)
+  GPIO.setup(23, GPIO.IN)
+  marca_rearme= GPIO.input(23)
   if(marca_rearme==1):
     print('rearme')
     return_rearmado=1
