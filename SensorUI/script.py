@@ -33,12 +33,12 @@ DISPLAY_RGB_ADDR = 0x62
 
 
 def main():
-  
+
  lcd.setCursor(1, 0)
  lcd.write('Iniciando...')
  colores_rgb(255,255,255)
  time.sleep(5)
-
+ estado_anterior=1
  t_hombremuerto= threading.Thread(target=hombremuerto)
  t_hombremuerto.start()
  
@@ -59,7 +59,7 @@ def main():
  while(salir==0):
   
   salir= GPIO.input(26) 
-  rearmado= boton_rearme()
+  rearmado= boton_rearme(estado_anterior)
   
   if (hombremuerto() and rearmado==1):
 
@@ -100,6 +100,7 @@ def main():
    print('alejese y rearme el sistema')
     #rearme=0"""
 
+  estado_anterior=rearmado
 
 lcd.clear()
 
@@ -174,18 +175,16 @@ def colores_rgb(r,g,b):
     bus.write_byte_data(DISPLAY_RGB_ADDR,2,b)
 
 #######################################################################################################
-def boton_rearme():
-  return_rearmado=1
-  print('me repito')
+def boton_rearme(estado_anterior):
 
-  while(True):
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(19, GPIO.IN)
-    marca_rearme= GPIO.input(19)
-    if(marca_rearme==1):
-      print('rearme')
-      return_rearmado=1
-
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(19, GPIO.IN)
+  marca_rearme= GPIO.input(19)
+  if(marca_rearme==1):
+    print('rearme')
+    return_rearmado=1
+  else:
+    return_rearmado= estado_anterior
     """print('entrado')
     marca_rearme= GPIO.input(19)
 
@@ -201,7 +200,6 @@ def boton_rearme():
     else:
       print('desarmado, debes rearmar')
       return_rearmado=0"""""
-
     return return_rearmado
 
 ######################################################################################################
