@@ -176,8 +176,9 @@ def colores_rgb(r,g,b):
 
 #######################################################################################################
 def boton_rearme():
-
+  return_rearmado=1
   print('me repito')
+  
   while(True):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(19, GPIO.IN)
