@@ -17,9 +17,9 @@ from SensorApp.models import UltrasonicSensor
 lcd = JHD1802()
 #ULTRASONIDOS
 sensor = GroveUltrasonicRanger(16)
-#lcd_rgb = JHD1313()
+#BUZZER
+buzzer = upmBuzzer.Buzzer(getGpioLookup('GPIO12'))
 
-#LCD RGB
 if sys.platform == 'uwp':
     import winrt_smbus as smbus
     bus = smbus.SMBus(2)
@@ -84,7 +84,7 @@ def main():
    contador= contador+1
 
    buzzer(contador)
-   
+
    rearmado=0
    time.sleep(1)
    lcd.clear()
@@ -184,7 +184,6 @@ def boton_rearme(estado_anterior):
   return return_rearmado
 
 def buzzer(contador):
-  buzzer = upmBuzzer.Buzzer(getGpioLookup('GPIO12'))
  
   CHORDS = [upmBuzzer.BUZZER_DO, upmBuzzer.BUZZER_RE, upmBuzzer.BUZZER_MI, upmBuzzer.BUZZER_FA, upmBuzzer.BUZZER_SOL, upmBuzzer.BUZZER_LA, upmBuzzer.BUZZER_SI]
   for contador in range(0, len(CHORDS)):
