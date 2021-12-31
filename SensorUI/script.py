@@ -78,7 +78,7 @@ def main():
    time.sleep(4)
 
   if(hombremuerto()==0 or rearmado==0):
-   #rearmado=0
+   rearmado=0
    time.sleep(1)
    lcd.clear()
    lcd.setCursor(0, 0)
