@@ -30,9 +30,10 @@ else:
     else:
         bus = smbus.SMBus(0)
 DISPLAY_RGB_ADDR = 0x62
+estado_anterior=1
 
 def main():
- estado_anterior=1
+ 
  counter = 0
   
  lcd.setCursor(1, 0)
@@ -42,10 +43,10 @@ def main():
  t_hombremuerto.start()
  
 
- t_rearme= threading.Thread(target=lambda: boton_rearme(estado_anterior))
+ t_rearme= threading.Thread(target=boton_rearme)
  t_rearme.start()
  #ttt = Thread(target=lambda: thistaginsert(tag))
- rearmado= boton_rearme(estado_anterior)
+ rearmado= boton_rearme()
 
  """t_distancia= threading.Thread(target=get_distancia)
  t_distancia.start()
@@ -164,7 +165,7 @@ def colores_rgb(r,g,b):
     bus.write_byte_data(DISPLAY_RGB_ADDR,2,b)
 
 #######################################################################################################
-def boton_rearme(estado_anterior):
+def boton_rearme():
  
   while(True):
     GPIO.setmode(GPIO.BCM)
