@@ -39,8 +39,8 @@ def main():
  colores_rgb(255,255,255)
  time.sleep(5)
  estado_anterior=1
- t_hombremuerto= threading.Thread(target=hombremuerto)
- t_hombremuerto.start()
+ """t_hombremuerto= threading.Thread(target=hombremuerto)
+ t_hombremuerto.start()"""
  
 
  #t_rearme= threading.Thread(target=boton_rearme)
