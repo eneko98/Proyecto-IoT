@@ -36,7 +36,7 @@ def main():
 
  lcd.setCursor(1, 0)
  lcd.write('Iniciando...')
- colores_rgb(255,255,255)
+ colores_rgb(163,236,253)
  time.sleep(5)
  estado_anterior=1
  rearmado=1
@@ -75,7 +75,7 @@ def main():
    new_sensor.date = UltrasonicSensor.date
    new_sensor.save()
    
-   time.sleep(4)
+   time.sleep(3)
 
   if(hombremuerto()==0 or rearmado==0):
    rearmado=0
