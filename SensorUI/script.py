@@ -87,13 +87,14 @@ def main():
    lcd.write('EMERGENCIA')
    colores_rgb(255,0,0)
    #rearmado=0
-   print('Alejese y rearme el sistema')
+   if(rearmado==0):
+    print('Rearme el sistema para continuar')
     #rearme=0"""
   print('----------------------------------------------------')
-  
+ lcd.clear()
+ print('EXIT...') 
 
-lcd.clear()
-print('EXIT...')
+
 #############################################################################################
 def hombremuerto():
   
