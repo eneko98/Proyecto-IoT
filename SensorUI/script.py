@@ -13,7 +13,6 @@ from SensorApp.models import UltrasonicSensor
 
 #LCD TEXTO
 lcd = JHD1802()
-
 #ULTRASONIDOS
 sensor = GroveUltrasonicRanger(16)
 #lcd_rgb = JHD1313()
@@ -32,32 +31,39 @@ else:
 DISPLAY_RGB_ADDR = 0x62
 
 
-def main():
 
- counter = 0
+def main():
   
  lcd.setCursor(1, 0)
  lcd.write('Iniciando...')
-  
+ time.sleep(5)
+ 
  t_hombremuerto= threading.Thread(target=hombremuerto)
  t_hombremuerto.start()
+ 
 
- t_rearme= threading.Thread(target=rearme)
+ t_rearme= threading.Thread(target=boton_rearme)
  t_rearme.start()
+ #ttt = Thread(target=lambda: thistaginsert(tag))
+ rearmado= boton_rearme()
 
- rearmado= rearme()
-
- t_distancia= threading.Thread(target=distancia)
+ """t_distancia= threading.Thread(target=get_distancia)
  t_distancia.start()
 
- distancia_sensor = distancia()
+ distancia_sensor = get_distancia()"""
 
  while (hombremuerto() and rearmado==1):
 
-   if(distancia_sensor<1):
+   medida_distancia = sensor.get_distance()
+   medida_distancia = (float(medida_distancia) / 100)
+
+   print("Distance: %.2f m" % medida_distancia)
+   
+   if(medida_distancia<1.0):
+     print('ERROR, DEMASIADO CERCA')
      rearmado=0
 
-   estado= rangos(distancia_sensor)
+   estado= rangos(medida_distancia)
    print(estado)
    print("\n")
    lcds(estado)
@@ -66,35 +72,34 @@ def main():
    new_sensor.name = "HC-SR04"
    new_sensor.description = ""
    new_sensor.pin = "16"
-   new_sensor.distance = distancia_sensor
+   new_sensor.distance = medida_distancia
    new_sensor.date = UltrasonicSensor.date
-   #print(str(new_sensor.date))
    new_sensor.save()
    
    time.sleep(4)
 
  while(hombremuerto()==0 or rearmado==0):
-    lcd.clear()
-    lcd.setCursor(0, 0)
-    lcd.write('PARADA DE')
-    lcd.setCursor(1, 0)
-    lcd.write('EMERGENCIA')
-    colores_rgb(255,0,0)
-    rearmado=0
-    print('alejese y rearme el sistema')
-    #rearme=0
+   lcd.clear()
+   lcd.setCursor(0, 0)
+   lcd.write('PARADA DE')
+   lcd.setCursor(1, 0)
+   lcd.write('EMERGENCIA')
+   colores_rgb(255,0,0)
+   #rearmado=0
+   print('alejese y rearme el sistema')
+    #rearme=0"""
 
 
- lcd.clear()
+lcd.clear()
 
 #############################################################################################
 def hombremuerto():
   while(True):
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(6, GPIO.IN)
-    hombre_muerto= GPIO.input(6)
+    GPIO.setup(5, GPIO.IN)
+    hombre_muerto= GPIO.input(5)
 
-    if hombre_muerto == False:
+    if hombre_muerto == True:
       print('pulsado')
       marca_pulsador=1
 
@@ -103,13 +108,12 @@ def hombremuerto():
       marca_pulsador=0  
     return marca_pulsador
 
-def distancia():
-
+"""def get_distancia():
   while(True):    
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
    print("Distance: %.2f m" % medida_distancia)
-   return(medida_distancia)
+   return(medida_distancia)"""
 
 ######################################################################################
 def rangos(distance):
@@ -159,16 +163,30 @@ def colores_rgb(r,g,b):
     bus.write_byte_data(DISPLAY_RGB_ADDR,2,b)
 
 #######################################################################################################
-def rearme():
-  GPIO.setmode(GPIO.BCM)
-  GPIO.setup(19, GPIO.IN)
+def boton_rearme():
+  estado_anterior=1
+  print('me repito')
   while(True):
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(19, GPIO.IN)
+    print('entrado')
     marca_rearme= GPIO.input(19)
-    if(marca_rearme==1):
+
+    if(marca_rearme==1 and estado_anterior==0):
+      return_rearmado=1
       print('rearmado')
+    elif(marca_rearme==1 and estado_anterior==1):
+      return_rearmado=0
+      print('desarmado')
+    elif(marca_rearme==0 and estado_anterior==1):
+      print('rearmadox2')
+      return_rearmado=1
     else:
-      print('desarmado')  
-    return marca_rearme
+      print('desarmado, debes rearmar')
+      return_rearmado=0
+
+    estado_anterior=return_rearmado
+    return return_rearmado
 
 ######################################################################################################
 if __name__ == '__main__':
