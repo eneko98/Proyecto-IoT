@@ -4,6 +4,8 @@ import RPi.GPIO as GPIO
 import threading
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 from grove.display.jhd1802 import JHD1802
+from mraa import getGpioLookup
+from upm import pyupm_buzzer as upmBuzzer
 #from grove.display.jhd1313 import JHD1313
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SensorUI.settings")
@@ -15,9 +17,13 @@ from SensorApp.models import UltrasonicSensor
 lcd = JHD1802()
 #ULTRASONIDOS
 sensor = GroveUltrasonicRanger(16)
-#lcd_rgb = JHD1313()
+#BUZZER
+buzzer = upmBuzzer.Buzzer(getGpioLookup('GPIO12'))
 
-#LCD RGB
+CHORDS = [upmBuzzer.BUZZER_DO, upmBuzzer.BUZZER_RE, upmBuzzer.BUZZER_MI, 
+        upmBuzzer.BUZZER_FA, upmBuzzer.BUZZER_SOL, upmBuzzer.BUZZER_LA, 
+        upmBuzzer.BUZZER_SI]
+
 if sys.platform == 'uwp':
     import winrt_smbus as smbus
     bus = smbus.SMBus(2)
@@ -33,40 +39,39 @@ DISPLAY_RGB_ADDR = 0x62
 
 
 def main():
-  
+
  lcd.setCursor(1, 0)
  lcd.write('Iniciando...')
+ colores_rgb(163,236,253)
  time.sleep(5)
+ estado_anterior=1
+ rearmado=1
 
- t_hombremuerto= threading.Thread(target=hombremuerto)
- t_hombremuerto.start()
- 
+ GPIO.setmode(GPIO.BCM)
+ GPIO.setup(26, GPIO.IN)
+ salir= GPIO.input(26) 
 
- t_rearme= threading.Thread(target=boton_rearme)
- t_rearme.start()
- #ttt = Thread(target=lambda: thistaginsert(tag))
- rearmado= boton_rearme()
-
- """t_distancia= threading.Thread(target=get_distancia)
- t_distancia.start()
-
- distancia_sensor = get_distancia()"""
- while(True):
-
+ while(salir==0):
+  
+  estado_anterior=rearmado
+  
+  salir= GPIO.input(26) 
+  rearmado= boton_rearme(estado_anterior)
+  
   if (hombremuerto() and rearmado==1):
+   contador=0
 
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
 
-   print("Distance: %.2f m" % medida_distancia)
+   print("Distancia a la que se encuentra: %.2f m" % medida_distancia)
    
    if(medida_distancia<1.0):
      print('ERROR, DEMASIADO CERCA')
      rearmado=0
 
    estado= rangos(medida_distancia)
-   print(estado)
-   print("\n")
+   
    lcds(estado)
 
    new_sensor = UltrasonicSensor()
@@ -77,9 +82,15 @@ def main():
    new_sensor.date = UltrasonicSensor.date
    new_sensor.save()
    
-   time.sleep(4)
+   time.sleep(3)
 
   if(hombremuerto()==0 or rearmado==0):
+   contador= contador+1
+
+   buzzer_sonido(contador)
+
+   rearmado=0
+   time.sleep(1)
    lcd.clear()
    lcd.setCursor(0, 0)
    lcd.write('PARADA DE')
@@ -87,27 +98,27 @@ def main():
    lcd.write('EMERGENCIA')
    colores_rgb(255,0,0)
    #rearmado=0
-   print('alejese y rearme el sistema')
+   if(rearmado==0):
+    print('Rearme el sistema para continuar')
     #rearme=0"""
+  print('----------------------------------------------------')
+ lcd.clear()
+ print('EXIT...') 
 
-
-lcd.clear()
 
 #############################################################################################
 def hombremuerto():
-  while(True):
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(5, GPIO.IN)
-    hombre_muerto= GPIO.input(5)
+  
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(5, GPIO.IN)
+  hombre_muerto= GPIO.input(5)
 
-    if hombre_muerto == True:
-      print('pulsado')
-      marca_pulsador=1
-
-    else:
-      print('no pulsado')
-      marca_pulsador=0  
-    return marca_pulsador
+  if hombre_muerto == True:
+    marca_pulsador=1
+  else:
+    print('Has soltado el hombre muerto')
+    marca_pulsador=0  
+  return marca_pulsador
 
 """def get_distancia():
   while(True):    
@@ -164,31 +175,26 @@ def colores_rgb(r,g,b):
     bus.write_byte_data(DISPLAY_RGB_ADDR,2,b)
 
 #######################################################################################################
-def boton_rearme():
-  estado_anterior=1
-  print('me repito')
-  while(True):
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(19, GPIO.IN)
-    print('entrado')
-    marca_rearme= GPIO.input(19)
+def boton_rearme(estado_anterior):
 
-    if(marca_rearme==1 and estado_anterior==0):
-      return_rearmado=1
-      print('rearmado')
-    elif(marca_rearme==1 and estado_anterior==1):
-      return_rearmado=0
-      print('desarmado')
-    elif(marca_rearme==0 and estado_anterior==1):
-      print('rearmadox2')
-      return_rearmado=1
-    else:
-      print('desarmado, debes rearmar')
-      return_rearmado=0
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(23, GPIO.IN)
+  marca_rearme= GPIO.input(23)
+  if(marca_rearme==1):
+    print('Sistema rearmado')
+    return_rearmado=1
+  else:
+    return_rearmado= estado_anterior
+  return return_rearmado
 
-    estado_anterior=return_rearmado
-    return return_rearmado
-
+def buzzer_sonido ():
+ buzzer = upmBuzzer.Buzzer(getGpioLookup('GPIO12'))
+ 
+ for i in range(0, len(CHORDS)):
+  buzzer.playSound(CHORDS[i], 500000)
+  time.sleep(0.1)
+  
+ del buzzer
 ######################################################################################################
 if __name__ == '__main__':
  main()
