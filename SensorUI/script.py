@@ -53,7 +53,7 @@ def main():
   rearmado= boton_rearme(estado_anterior)
   
   if (hombremuerto() and rearmado==1):
-   contador=0
+   servomotor()
    buzzer_sonido(0)
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
@@ -83,6 +83,7 @@ def main():
 
    buzzer_sonido(contador)
    new_lcdSensor = lcdSensor()
+  
    rearmado=0
    time.sleep(1)
    lcd.clear()
@@ -99,6 +100,7 @@ def main():
    colores_rgb(255,0,0)
    if(rearmado==0):
     print('Rearme el sistema para continuar')
+
    buzzer_sonido(1)
 
   print('----------------------------------------------------')
@@ -195,7 +197,30 @@ def buzzer_sonido (activado):
   GPIO.setup(22, GPIO.OUT)
   GPIO.output(22, activado)
 
+def servomotor():
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(12, GPIO.OUT)
+  p = GPIO.PWM(12, 50) # GPIO 17 for PWM with 50Hz
+  p.start(0)
 
+  p.ChangeDutyCycle(2.5)
+  time.sleep(0.5)
+  p.ChangeDutyCycle(5)
+  time.sleep(0.5)
+  p.ChangeDutyCycle(7.5)
+  time.sleep(0.5)
+  p.ChangeDutyCycle(10)
+  time.sleep(0.5)
+  p.ChangeDutyCycle(12.5)
+  time.sleep(0.5)
+  p.ChangeDutyCycle(10)
+  time.sleep(0.5)
+  p.ChangeDutyCycle(7.5)
+  time.sleep(0.5)
+  p.ChangeDutyCycle(5)
+  time.sleep(0.5)
+  p.ChangeDutyCycle(2.5)
+  time.sleep(0.5)
 
 ######################################################################################################
 if __name__ == '__main__':
