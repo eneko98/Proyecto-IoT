@@ -54,7 +54,9 @@
           <th>Date</th>
           <th>Name</th>
           <th>Stop Message</th>
+          <th>Warning Message</th>
           <th>Emergency Message</th>
+          <th>OK Message</th>
         </tr>
       </thead>
       <tbody>
@@ -66,7 +68,9 @@
           <td>{{ dato.date }}</td>
           <td>{{ dato.name }}</td>
           <td>{{ dato.stopMessage }}</td>
+          <td>{{ dato.warningMessage }}</td>
           <td>{{ dato.emergencyMessage }}</td>
+          <td>{{ dato.okMessage }}</td>
         </tr>
         {% endfor %}
       </tbody>
