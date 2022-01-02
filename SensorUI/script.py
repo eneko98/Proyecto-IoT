@@ -10,7 +10,7 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SensorUI.settings")
 import django
 django.setup()
-from SensorApp.models import UltrasonicSensor
+from SensorApp.models import UltrasonicSensor, lcdSensor
 
 #LCD TEXTO
 lcd = JHD1802()
@@ -68,13 +68,13 @@ def main():
    
    lcds(estado)
 
-   new_sensor = UltrasonicSensor()
-   new_sensor.name = "HC-SR04"
-   new_sensor.description = ""
-   new_sensor.pin = "16"
-   new_sensor.distance = medida_distancia
-   new_sensor.date = UltrasonicSensor.date
-   new_sensor.save()
+   new_Usensor = UltrasonicSensor()
+   new_Usensor.name = "HC-SR04"
+   new_Usensor.description = ""
+   new_Usensor.pin = "16"
+   new_Usensor.distance = medida_distancia
+   new_Usensor.date = UltrasonicSensor.date
+   new_Usensor.save()
    
    time.sleep(3)
 
@@ -82,14 +82,20 @@ def main():
    contador= contador+1
 
    buzzer_sonido(contador)
-
+   new_lcdSensor = lcdSensor()
    rearmado=0
    time.sleep(1)
    lcd.clear()
    lcd.setCursor(0, 0)
-   lcd.write('PARADA DE')
+   emergency1 = lcd.write('PARADA DE')
    lcd.setCursor(1, 0)
-   lcd.write('EMERGENCIA')
+   emergency2 = lcd.write('EMERGENCIA')
+   new_lcdSensor.name = "JHD1802"
+   new_lcdSensor.description = ""
+   new_lcdSensor.pin = "SCL,SDA"
+   new_lcdSensor.date = lcdSensor.date
+   new_lcdSensor.emergencyMessage = emergency1 + " " + emergency2
+   new_lcdSensor.save()
    colores_rgb(255,0,0)
    if(rearmado==0):
     print('Rearme el sistema para continuar')
@@ -144,9 +150,12 @@ def lcds(estado):
    colores_rgb(255,0,0)
 
   elif(estado==2):
+   new_lcdSensor = lcdSensor()
    lcd.clear()
    lcd.setCursor(0, 0)
-   lcd.write('WARNING')
+   warning = lcd.write('WARNING')
+   new_lcdSensor.stopMessage = warning
+   new_lcdSensor.save()
    lcd.setCursor(1, 0)
    lcd.write('Modere la distancia')
    colores_rgb(255,173,0)
