@@ -4,8 +4,7 @@ import RPi.GPIO as GPIO
 import threading
 from grove.grove_ultrasonic_ranger import GroveUltrasonicRanger
 from grove.display.jhd1802 import JHD1802
-from mraa import getGpioLookup
-from upm import pyupm_buzzer as upmBuzzer
+
 #from grove.display.jhd1313 import JHD1313
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SensorUI.settings")
@@ -17,12 +16,7 @@ from SensorApp.models import UltrasonicSensor
 lcd = JHD1802()
 #ULTRASONIDOS
 sensor = GroveUltrasonicRanger(16)
-#BUZZER
-buzzer = upmBuzzer.Buzzer(getGpioLookup('GPIO12'))
 
-CHORDS = [upmBuzzer.BUZZER_DO, upmBuzzer.BUZZER_RE, upmBuzzer.BUZZER_MI, 
-        upmBuzzer.BUZZER_FA, upmBuzzer.BUZZER_SOL, upmBuzzer.BUZZER_LA, 
-        upmBuzzer.BUZZER_SI]
 
 if sys.platform == 'uwp':
     import winrt_smbus as smbus
@@ -60,7 +54,7 @@ def main():
   
   if (hombremuerto() and rearmado==1):
    contador=0
-   buzzer(0)
+   buzzer_sonido(0)
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
 
@@ -99,7 +93,7 @@ def main():
    colores_rgb(255,0,0)
    if(rearmado==0):
     print('Rearme el sistema para continuar')
-   buzzer(1)
+   buzzer_sonido(1)
 
   print('----------------------------------------------------')
  lcd.clear()
