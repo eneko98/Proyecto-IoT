@@ -79,10 +79,7 @@ def main():
    time.sleep(3)
 
   if(hombremuerto()==0 or rearmado==0):
-   contador= contador+1
-
-   buzzer_sonido(contador)
-
+  
    rearmado=0
    time.sleep(1)
    lcd.clear()
@@ -93,6 +90,7 @@ def main():
    colores_rgb(255,0,0)
    if(rearmado==0):
     print('Rearme el sistema para continuar')
+    
    buzzer_sonido(1)
 
   print('----------------------------------------------------')
