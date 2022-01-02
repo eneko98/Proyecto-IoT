@@ -64,7 +64,7 @@ def main():
      print('ERROR, DEMASIADO CERCA')
      rearmado=0
 
-   estado= rangos(medida_distancia)
+   estado= rangos(medida_distancia, rearmado)
    
    lcds(estado)
 
@@ -85,19 +85,8 @@ def main():
    new_lcdSensor = lcdSensor()
   
    rearmado=0
-   time.sleep(1)
-   lcd.clear()
-   lcd.setCursor(0, 0)
-   emergency1 = lcd.write('PARADA DE')
-   lcd.setCursor(1, 0)
-   emergency2 = lcd.write('EMERGENCIA')
-   new_lcdSensor.name = "JHD1802"
-   new_lcdSensor.description = ""
-   new_lcdSensor.pin = "SCL,SDA"
-   new_lcdSensor.date = lcdSensor.date
-   new_lcdSensor.emergencyMessage = emergency1 + " " + emergency2
-   new_lcdSensor.save()
-   colores_rgb(255,0,0)
+
+    
    if(rearmado==0):
     print('Rearme el sistema para continuar')
 
@@ -122,15 +111,9 @@ def hombremuerto():
     marca_pulsador=0  
   return marca_pulsador
 
-"""def get_distancia():
-  while(True):    
-   medida_distancia = sensor.get_distance()
-   medida_distancia = (float(medida_distancia) / 100)
-   print("Distance: %.2f m" % medida_distancia)
-   return(medida_distancia)"""
 
 ######################################################################################
-def rangos(distance):
+def rangos(distance, rearme_ok):
 
   if(distance<=1.5):
     estado=1
@@ -138,37 +121,78 @@ def rangos(distance):
     estado=2 
   elif(distance>2.3):
     estado=3
+
+  if (rearme_ok==0):
+    estado=4
+
   return estado
 
 #############################################################################################
 def lcds(estado):
   
   if(estado==1):
+   new_lcdSensor=lcdSensor()
    lcd.clear()
    lcd.setCursor(0, 0)
-   lcd.write('ALARMA')
+   alarma1 = lcd.write('ALARMA')
    lcd.setCursor(1, 0)
-   lcd.write('Peligro, alejese')
+   alarma2 = lcd.write('Peligro, alejese')
    colores_rgb(255,0,0)
+
+   new_lcdSensor.name = "JHD1802"
+   new_lcdSensor.description = ""
+   new_lcdSensor.pin = "SCL,SDA"
+   new_lcdSensor.date = lcdSensor.date
+   new_lcdSensor.stopMessage = alarma1 + "- " + alarma2
+   new_lcdSensor.save() 
 
   elif(estado==2):
    new_lcdSensor = lcdSensor()
    lcd.clear()
    lcd.setCursor(0, 0)
-   warning = lcd.write('WARNING')
-   new_lcdSensor.stopMessage = warning
-   new_lcdSensor.save()
+   warning1 = lcd.write('WARNING')
    lcd.setCursor(1, 0)
-   lcd.write('Modere la distancia')
+   warning2 = lcd.write('Modere la distancia')
    colores_rgb(255,173,0)
 
+   new_lcdSensor.name = "JHD1802"
+   new_lcdSensor.description = ""
+   new_lcdSensor.pin = "SCL,SDA"
+   new_lcdSensor.date = lcdSensor.date
+   new_lcdSensor.warningMessage = warning1 + "- " + warning2
+   new_lcdSensor.save()
+
   elif(estado==3):
+   new_lcdSensor = lcdSensor()
    lcd.clear()
    lcd.setCursor(0, 0)
-   lcd.write('OK')
+   ok1 = lcd.write('OK')
    lcd.setCursor(1, 0)
-   lcd.write('Distancia OK')
-   colores_rgb(0,255,0) 
+   ok2 = lcd.write('Distancia OK')
+   colores_rgb(0,255,0)
+   
+   new_lcdSensor.name = "JHD1802"
+   new_lcdSensor.description = ""
+   new_lcdSensor.pin = "SCL,SDA"
+   new_lcdSensor.date = lcdSensor.date
+   new_lcdSensor.okMessage = ok1 + "- " + ok2
+   new_lcdSensor.save()
+
+  elif(estado==4):
+   new_lcdSensor=lcdSensor()
+   time.sleep(1)
+   lcd.clear()
+   lcd.setCursor(0, 0)
+   emergency1 = lcd.write('PARADA DE')
+   lcd.setCursor(1, 0)
+   emergency2 = lcd.write('EMERGENCIA')
+   colores_rgb(255,0,0)
+   new_lcdSensor.name = "JHD1802"
+   new_lcdSensor.description = ""
+   new_lcdSensor.pin = "SCL,SDA"
+   new_lcdSensor.date = lcdSensor.date
+   new_lcdSensor.emergencyMessage = emergency1 + " " + emergency2
+   new_lcdSensor.save() 
 
 
 def colores_rgb(r,g,b):

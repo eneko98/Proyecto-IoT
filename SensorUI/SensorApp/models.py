@@ -28,6 +28,8 @@ class lcdSensor(Sensor):
     """
     lcd Sensor Model
     """
-    name = models.CharField(max_length=100, default="Grove LCD BoW")
-    stopMessage = models.CharField(max_length=255)
-    emergencyMessage = models.CharField(max_length=255)
+    name = models.CharField(max_length=100, default="JHD1802")
+    stopMessage = models.CharField(max_length=255, null=True, blank=True)
+    warningMessage = models.CharField(max_length=255, null=True, blank=True)
+    emergencyMessage = models.CharField(max_length=255, null=True, blank=True)
+    okMessage = models.CharField(max_length=255, null=True, blank=True)
