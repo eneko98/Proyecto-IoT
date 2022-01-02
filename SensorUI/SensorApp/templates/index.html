@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,10 +9,33 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Índice</title>
+    <title>Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .hello-msg {
+        font-size: 18px;
+        font-weight: bold;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        margin-left: 10px;
+        margin-top: 10px;
+      }
+      .logout-msg {
+        font-size: 18px;
+        font-weight: bold;
+        color: rgb(75, 75, 75);
+        text-align: center;
+        margin-left: 30px;
+        margin-top: 10px;
+      }
+      a:hover {
+        background-color: yellow;
+      }
+    </style>
   </head>
   <body>
+    <span class="hello-msg"> Hello, {{request.user}} </span>
+    <span><a class="logout-msg" href="{% url 'logout' %}">Logout</a></span>
     <div class="columns-3 max-w-4xl mx-auto mt-4">
       <a href="./ultrasonic"
         ><img

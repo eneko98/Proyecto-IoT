@@ -1,64 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados</title>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ultrasonidos</title>
+    <link
+      rel="stylesheet"
+      href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <style type="text/css">
-        #main {
-            top: 20%;
-            width: 100%;
-            align-items: center;
-            text-align:center;
-        }
-        #tick, #cross {
-            display: none;
-        }
+      #main {
+        top: 20%;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+      }
+      #tick,
+      #cross {
+        display: none;
+      }
 
-        body {
-            -webkit-animation: bgcolor 20s infinite;
-            animation: bgcolor 10s infinite;
-            -webit-animation-direction: alternate;
-            animation-direction: alternate;
-        }
+      body {
+        -webkit-animation: bgcolor 20s infinite;
+        animation: bgcolor 10s infinite;
+        -webit-animation-direction: alternate;
+        animation-direction: alternate;
+      }
     </style>
-    <script type="text/javascript">
-
-    </script>
-</head>
-<body class="hm-gradient px-3">
-
+    <script type="text/javascript"></script>
+  </head>
+  <body class="hm-gradient px-3">
     <table class="table table-striped">
-        <thead class="bg-white">
-            <tr>
-                <th>#</th>
-                <th>Description</th>
-                <th>Pin</th>
-                <th>Distance</th>
-                <th>Date</th>
-                <th>Name</th>
-            </tr>
-                        </thead>
-                        <tbody>
-                            {% for dato in datos %}
-                            <tr class="bg-white">
-                                <th scope="row">{{ forloop.counter }}</th>
-                                <td>{{ dato.description }}</td>
-                                <td>{{ dato.pin }}</td>
-                                <td>{{ dato.distance }}</td>
-                                <td>{{ dato.date }}</td>
-                                <td>{{ dato.name }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-
-</body>
-<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <thead class="bg-white">
+        <tr>
+          <th>#</th>
+          <th>Description</th>
+          <th>Pin</th>
+          <th>Distance</th>
+          <th>Date</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for dato in datos %}
+        <tr class="bg-white">
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ dato.description }}</td>
+          <td>{{ dato.pin }}</td>
+          <td>{{ dato.distance }}</td>
+          <td>{{ dato.date }}</td>
+          <td>{{ dato.name }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+  <script
+    type="text/javascript"
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+  ></script>
 </html>
