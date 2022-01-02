@@ -28,8 +28,6 @@ def lcdResultados(request):
 def live(request):
     return StreamingHttpResponse(gen(VideoCamera()),content_type="multipart/x-mixed-replace;boundary=frame")
     
-
-
 def gen(camera):
     while True:
         frame = camera.get_frame()
