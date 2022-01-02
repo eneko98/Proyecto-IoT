@@ -60,7 +60,7 @@ def main():
   
   if (hombremuerto() and rearmado==1):
    contador=0
-
+   buzzer(0)
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
 
@@ -97,10 +97,10 @@ def main():
    lcd.setCursor(1, 0)
    lcd.write('EMERGENCIA')
    colores_rgb(255,0,0)
-   #rearmado=0
    if(rearmado==0):
     print('Rearme el sistema para continuar')
-    #rearme=0"""
+   buzzer(1)
+
   print('----------------------------------------------------')
  lcd.clear()
  print('EXIT...') 
@@ -187,14 +187,13 @@ def boton_rearme(estado_anterior):
     return_rearmado= estado_anterior
   return return_rearmado
 
-def buzzer_sonido ():
- buzzer = upmBuzzer.Buzzer(getGpioLookup('GPIO12'))
- 
- for i in range(0, len(CHORDS)):
-  buzzer.playSound(CHORDS[i], 500000)
-  time.sleep(0.1)
-  
- del buzzer
+def buzzer_sonido (activado):
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(22, GPIO.OUT)
+  GPIO.output(22, activado)
+
+
+
 ######################################################################################################
 if __name__ == '__main__':
  main()
