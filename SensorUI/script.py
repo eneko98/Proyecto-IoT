@@ -43,7 +43,7 @@ def main():
 
  GPIO.setmode(GPIO.BCM)
  GPIO.setup(26, GPIO.IN)
- salir= GPIO.input(26) 
+ salir = GPIO.input(26) 
 
  while(salir==0):
   
@@ -62,9 +62,9 @@ def main():
    
    if(medida_distancia<1.0):
      print('ERROR, DEMASIADO CERCA')
-     rearmado=0
+     rearmado = 0
 
-   estado= rangos(medida_distancia, rearmado)
+   estado = rangos(medida_distancia, rearmado)
    
    lcds(estado)
 
@@ -79,12 +79,12 @@ def main():
    time.sleep(3)
 
   if(hombremuerto()==0 or rearmado==0):
-   contador= contador+1
+   contador = contador+1
 
    buzzer_sonido(contador)
    new_lcdSensor = lcdSensor()
   
-   rearmado=0
+   rearmado = 0
 
     
    if(rearmado==0):
@@ -140,10 +140,10 @@ def lcds(estado):
    colores_rgb(255,0,0)
 
    new_lcdSensor.name = "JHD1802"
-   new_lcdSensor.description = ""
+   new_lcdSensor.description = "Alarma en sensor LCD"
    new_lcdSensor.pin = "SCL,SDA"
    new_lcdSensor.date = lcdSensor.date
-   new_lcdSensor.stopMessage = alarma1 + "- " + alarma2
+   new_lcdSensor.stopMessage = alarma1 + "-" + alarma2
    new_lcdSensor.save() 
 
   elif(estado==2):
@@ -156,10 +156,10 @@ def lcds(estado):
    colores_rgb(255,173,0)
 
    new_lcdSensor.name = "JHD1802"
-   new_lcdSensor.description = ""
+   new_lcdSensor.description = "Warning en sensor LCD"
    new_lcdSensor.pin = "SCL,SDA"
    new_lcdSensor.date = lcdSensor.date
-   new_lcdSensor.warningMessage = warning1 + "- " + warning2
+   new_lcdSensor.warningMessage = warning1 + "-" + warning2
    new_lcdSensor.save()
 
   elif(estado==3):
@@ -172,7 +172,7 @@ def lcds(estado):
    colores_rgb(0,255,0)
    
    new_lcdSensor.name = "JHD1802"
-   new_lcdSensor.description = ""
+   new_lcdSensor.description = "Ok en sensor LCD"
    new_lcdSensor.pin = "SCL,SDA"
    new_lcdSensor.date = lcdSensor.date
    new_lcdSensor.okMessage = ok1 + "- " + ok2
@@ -188,7 +188,7 @@ def lcds(estado):
    emergency2 = lcd.write('EMERGENCIA')
    colores_rgb(255,0,0)
    new_lcdSensor.name = "JHD1802"
-   new_lcdSensor.description = ""
+   new_lcdSensor.description = "Parada de emergencia en sensor LCD"
    new_lcdSensor.pin = "SCL,SDA"
    new_lcdSensor.date = lcdSensor.date
    new_lcdSensor.emergencyMessage = emergency1 + " " + emergency2
