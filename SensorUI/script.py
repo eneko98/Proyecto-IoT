@@ -79,9 +79,6 @@ def main():
    time.sleep(3)
 
   if(hombremuerto()==0 or rearmado==0):
-   contador = contador+1
-
-   buzzer_sonido(contador)
    new_lcdSensor = lcdSensor()
   
    rearmado = 0
@@ -91,7 +88,7 @@ def main():
     print('Rearme el sistema para continuar')
 
    buzzer_sonido(1)
-
+   time.sleep(1)
   print('----------------------------------------------------')
  lcd.clear()
  print('EXIT...') 
@@ -134,48 +131,48 @@ def lcds(estado):
    new_lcdSensor=lcdSensor()
    lcd.clear()
    lcd.setCursor(0, 0)
-   alarma1 = lcd.write('ALARMA')
+   alarma = lcd.write('ALARMA')
    lcd.setCursor(1, 0)
-   alarma2 = lcd.write('Peligro, alejese')
+   lcd.write('Peligro, alejese')
    colores_rgb(255,0,0)
 
    new_lcdSensor.name = "JHD1802"
    new_lcdSensor.description = "Alarma en sensor LCD"
    new_lcdSensor.pin = "SCL,SDA"
    new_lcdSensor.date = lcdSensor.date
-   new_lcdSensor.stopMessage = alarma1 + "-" + alarma2
+   new_lcdSensor.stopMessage = alarma
    new_lcdSensor.save() 
 
   elif(estado==2):
    new_lcdSensor = lcdSensor()
    lcd.clear()
    lcd.setCursor(0, 0)
-   warning1 = lcd.write('WARNING')
+   warning = lcd.write('WARNING')
    lcd.setCursor(1, 0)
-   warning2 = lcd.write('Modere la distancia')
+   lcd.write('Modere la distancia')
    colores_rgb(255,173,0)
 
    new_lcdSensor.name = "JHD1802"
    new_lcdSensor.description = "Warning en sensor LCD"
    new_lcdSensor.pin = "SCL,SDA"
    new_lcdSensor.date = lcdSensor.date
-   new_lcdSensor.warningMessage = warning1 + "-" + warning2
+   new_lcdSensor.warningMessage = warning
    new_lcdSensor.save()
 
   elif(estado==3):
    new_lcdSensor = lcdSensor()
    lcd.clear()
    lcd.setCursor(0, 0)
-   ok1 = lcd.write('OK')
+   ok = lcd.write('OK')
    lcd.setCursor(1, 0)
-   ok2 = lcd.write('Distancia OK')
+   lcd.write('Distancia OK')
    colores_rgb(0,255,0)
    
    new_lcdSensor.name = "JHD1802"
    new_lcdSensor.description = "Ok en sensor LCD"
    new_lcdSensor.pin = "SCL,SDA"
    new_lcdSensor.date = lcdSensor.date
-   new_lcdSensor.okMessage = ok1 + "- " + ok2
+   new_lcdSensor.okMessage = ok
    new_lcdSensor.save()
 
   elif(estado==4):
@@ -183,15 +180,15 @@ def lcds(estado):
    time.sleep(1)
    lcd.clear()
    lcd.setCursor(0, 0)
-   emergency1 = lcd.write('PARADA DE')
+   emergency = lcd.write('PARADA DE')
    lcd.setCursor(1, 0)
-   emergency2 = lcd.write('EMERGENCIA')
+   lcd.write('EMERGENCIA')
    colores_rgb(255,0,0)
    new_lcdSensor.name = "JHD1802"
    new_lcdSensor.description = "Parada de emergencia en sensor LCD"
    new_lcdSensor.pin = "SCL,SDA"
    new_lcdSensor.date = lcdSensor.date
-   new_lcdSensor.emergencyMessage = emergency1 + " " + emergency2
+   new_lcdSensor.emergencyMessage = emergency
    new_lcdSensor.save() 
 
 
@@ -211,6 +208,8 @@ def boton_rearme(estado_anterior):
   marca_rearme= GPIO.input(23)
   if(marca_rearme==1):
     print('Sistema rearmado')
+    lcd.clear()
+    colores_rgb(0,255,0)
     return_rearmado=1
   else:
     return_rearmado= estado_anterior

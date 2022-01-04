@@ -6,7 +6,7 @@ class Sensor(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=255)
     date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    pin = models.IntegerField()
+    pin = models.CharField(max_length=100)
 
     class Meta:
         abstract = True
