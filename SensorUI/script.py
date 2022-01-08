@@ -53,8 +53,8 @@ def main():
   rearmado= boton_rearme(estado_anterior)
   
   if (hombremuerto() and rearmado==1):
-   servomotor()
    buzzer_sonido(0)
+   servomotor()
    medida_distancia = sensor.get_distance()
    medida_distancia = (float(medida_distancia) / 100)
 
@@ -91,6 +91,7 @@ def main():
    time.sleep(1)
   print('----------------------------------------------------')
  lcd.clear()
+ buzzer_sonido(0)
  print('EXIT...') 
 
 
@@ -128,10 +129,11 @@ def rangos(distance, rearme_ok):
 def lcds(estado):
   
   if(estado==1):
+   alarma = "ALARMA"
    new_lcdSensor=lcdSensor()
    lcd.clear()
    lcd.setCursor(0, 0)
-   alarma = lcd.write('ALARMA')
+   lcd.write('ALARMA')
    lcd.setCursor(1, 0)
    lcd.write('Peligro, alejese')
    colores_rgb(255,0,0)
@@ -144,10 +146,11 @@ def lcds(estado):
    new_lcdSensor.save() 
 
   elif(estado==2):
+   warning = "WARNING"
    new_lcdSensor = lcdSensor()
    lcd.clear()
    lcd.setCursor(0, 0)
-   warning = lcd.write('WARNING')
+   lcd.write('WARNING')
    lcd.setCursor(1, 0)
    lcd.write('Modere la distancia')
    colores_rgb(255,173,0)
@@ -160,10 +163,11 @@ def lcds(estado):
    new_lcdSensor.save()
 
   elif(estado==3):
+   ok = "OK"
    new_lcdSensor = lcdSensor()
    lcd.clear()
    lcd.setCursor(0, 0)
-   ok = lcd.write('OK')
+   lcd.write('OK')
    lcd.setCursor(1, 0)
    lcd.write('Distancia OK')
    colores_rgb(0,255,0)
@@ -176,11 +180,12 @@ def lcds(estado):
    new_lcdSensor.save()
 
   elif(estado==4):
-   new_lcdSensor=lcdSensor()
+   emergency = "EMERGENCIA"
+   new_lcdSensor = lcdSensor()
    time.sleep(1)
    lcd.clear()
    lcd.setCursor(0, 0)
-   emergency = lcd.write('PARADA DE')
+   lcd.write('PARADA DE')
    lcd.setCursor(1, 0)
    lcd.write('EMERGENCIA')
    colores_rgb(255,0,0)
@@ -212,10 +217,10 @@ def boton_rearme(estado_anterior):
     colores_rgb(0,255,0)
     return_rearmado=1
   else:
-    return_rearmado= estado_anterior
+    return_rearmado = estado_anterior
   return return_rearmado
 
-def buzzer_sonido (activado):
+def buzzer_sonido(activado):
   GPIO.setmode(GPIO.BCM)
   GPIO.setup(22, GPIO.OUT)
   GPIO.output(22, activado)
